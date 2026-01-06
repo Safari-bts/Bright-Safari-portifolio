@@ -732,6 +732,180 @@ h1, h2, h3, h4 {
     font-size: 0.9rem;
 }
 
+/* Video Photography Section */
+.video-production {
+    padding: 8rem 0;
+    background: rgba(10, 10, 15, 0.7);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-production::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 30% 70%, rgba(255, 0, 128, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.production-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.production-text {
+    background: rgba(30, 41, 59, 0.7);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 0, 128, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.production-text h3 {
+    color: var(--neon-blue);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.production-text h3 i {
+    color: #ff0080;
+    animation: iconGlow 2s infinite alternate;
+}
+
+.production-description {
+    color: #cbd5e1;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.production-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: #cbd5e1;
+}
+
+.highlight-item i {
+    color: #ff0080;
+    font-size: 1.2rem;
+    margin-top: 3px;
+}
+
+.production-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.production-stat {
+    background: rgba(255, 0, 128, 0.1);
+    border: 1px solid rgba(255, 0, 128, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.production-stat:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 0, 128, 0.4);
+    box-shadow: 0 10px 20px rgba(255, 0, 128, 0.1);
+}
+
+.production-stat .number {
+    font-size: 1.8rem;
+    color: #ff0080;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 0.3rem;
+}
+
+.production-stat .label {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Video Gallery */
+.video-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    perspective: 1000px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+    border: 2px solid transparent;
+    background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 128, 0.1));
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px) rotateX(5deg);
+    border-color: rgba(255, 0, 128, 0.3);
+    box-shadow: 0 20px 40px rgba(255, 0, 128, 0.2);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition);
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+}
+
+.gallery-title {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.gallery-description {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
 /* Achievements Section */
 .achievements {
     padding: 8rem 0;
@@ -760,9 +934,6 @@ h1, h2, h3, h4 {
     border: 1px solid rgba(0, 212, 255, 0.1);
     backdrop-filter: blur(10px);
     transition: var(--transition);
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
     position: relative;
     overflow: hidden;
 }
@@ -907,70 +1078,6 @@ h1, h2, h3, h4 {
     display: flex;
     align-items: center;
     gap: 8px;
-}
-
-.achievement-preview {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.certificate-image {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(0, 212, 255, 0.2);
-}
-
-.certificate-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: var(--transition);
-}
-
-.certificate-image:hover .certificate-img {
-    transform: scale(1.05);
-}
-
-.certificate-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: var(--transition);
-}
-
-.certificate-image:hover .certificate-overlay {
-    opacity: 1;
-}
-
-.view-certificate {
-    background: rgba(0, 212, 255, 0.2);
-    border: 1px solid rgba(0, 212, 255, 0.4);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: var(--transition);
-    backdrop-filter: blur(10px);
-}
-
-.view-certificate:hover {
-    background: rgba(0, 212, 255, 0.4);
-    transform: scale(1.1);
 }
 
 /* Additional Achievements */
@@ -1724,6 +1831,10 @@ h1, h2, h3, h4 {
     .badges-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    .video-gallery {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 992px) {
@@ -1743,6 +1854,11 @@ h1, h2, h3, h4 {
     }
     
     .contact-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .production-content {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
@@ -1780,6 +1896,10 @@ h1, h2, h3, h4 {
     
     .modules-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .video-gallery {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -1832,6 +1952,14 @@ h1, h2, h3, h4 {
     }
     
     .badges-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .production-stats {
         grid-template-columns: 1fr;
     }
 }
