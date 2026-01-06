@@ -1,1 +1,0 @@
-# Bright-Safari-portifolio
