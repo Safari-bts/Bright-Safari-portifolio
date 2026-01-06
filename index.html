@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bright Safari | AI & Tech Portfolio</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M1BLSXKPQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-6M1BLSXKPQ');
+    </script>
+    <!-- End Google tag -->
+    
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +54,7 @@
         <div class="mobile-menu-content">
             <a href="#home" class="mobile-nav-link">Home</a>
             <a href="#about" class="mobile-nav-link">About</a>
-            <a href="#video-production" class="nav-link">Production</a>
+            <a href="#video-production" class="mobile-nav-link">Production</a>
             <a href="#achievements" class="mobile-nav-link">Achievements</a>
             <a href="#projects" class="mobile-nav-link">Projects</a>
             <a href="#skills" class="mobile-nav-link">Skills</a>
@@ -68,18 +79,26 @@
                         <span class="ai-highlight">AI-Powered Solutions</span>
                     </div>
                     <div class="hero-actions">
-                        <a href="#projects" class="btn btn-primary">
+                        <a href="#projects" class="btn btn-primary" id="viewProjectsBtn">
                             <i class="fas fa-rocket"></i> View Projects
                         </a>
-                        <a href="#achievements" class="btn btn-secondary">
+                        <a href="#achievements" class="btn btn-secondary" id="viewAchievementsBtn">
                             <i class="fas fa-trophy"></i> My Achievements
                         </a>
                     </div>
                     <div class="hero-social">
-                        <a href="https://github.com/Safari-bts" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/bright-safari-345833272/" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/yourusername" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="mailto:safaribright93@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="https://github.com/yourusername" class="social-link" id="githubLink">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" class="social-link" id="linkedinLink">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/yourusername" class="social-link" id="twitterLink">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:safaribright93@gmail.com" class="social-link" id="emailLink">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -124,7 +143,7 @@
                     <p>
                         With guidance from professional mentors in the field and leveraging AI as an assistant tool, 
                         I've developed practical applications including a fully functional 
-                        <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link-inline">Church Attendance App</a> 
+                        <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link-inline" id="churchAppLink">Church Attendance App</a> 
                         and the innovative <strong>Rentwise platform</strong> using cutting-edge technologies.
                     </p>
                     <p>
@@ -143,7 +162,8 @@
                         <div class="passion-tags">
                             <span class="passion-tag">AI & Machine Learning</span>
                             <span class="passion-tag">Full-Stack Development</span>
-                            <span class="passion-tag">Computer Science</span>
+                            <span class="passion-tag">Cybersecurity</span>
+                            <span class="passion-tag">Data Science</span>
                             <span class="passion-tag">Cloud Computing</span>
                         </div>
                     </div>
@@ -174,102 +194,100 @@
         </div>
     </section>
 
-
     <!-- Video Photography Section -->
-<section class="video-production" id="video-production">
-    <div class="container">
-        <h2 class="section-title">
-            <i class="fas fa-video"></i> Live Production & Media
-        </h2>
-        <div class="production-content">
-            <div class="production-text">
-                <h3><i class="fas fa-broadcast-tower"></i> Church Live Streaming & Video Production</h3>
-                <p class="production-description">
-                    Beyond software development, I've been actively involved in live video production 
-                    and photography for TAG ICC Dodoma Church. Combining technical expertise with 
-                    creative vision, I manage live streaming setups, multi-camera operations, and 
-                    post-production editing to deliver professional-quality broadcasts.
-                </p>
-                
-                <div class="production-highlights">
-                    <div class="highlight-item">
-                        <i class="fas fa-satellite-dish"></i>
-                        <div>
-                            <h4>Live Streaming Operations</h4>
-                            <p>Managing real-time broadcast setup with Vmix, multi-camera switching, 
-                            and audio mixing for church services reaching hundreds of viewers online.</p>
+    <section class="video-production" id="video-production">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-video"></i> Live Production & Media
+            </h2>
+            <div class="production-content">
+                <div class="production-text">
+                    <h3><i class="fas fa-broadcast-tower"></i> Church Live Streaming & Video Production</h3>
+                    <p class="production-description">
+                        Beyond software development, I've been actively involved in live video production 
+                        and photography for TAG ICC Dodoma Church. Combining technical expertise with 
+                        creative vision, I manage live streaming setups, multi-camera operations, and 
+                        post-production editing to deliver professional-quality broadcasts.
+                    </p>
+                    
+                    <div class="production-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-satellite-dish"></i>
+                            <div>
+                                <h4>Live Streaming Operations</h4>
+                                <p>Managing real-time broadcast setup with OBS Studio, multi-camera switching, 
+                                and audio mixing for church services reaching hundreds of viewers online.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <i class="fas fa-camera"></i>
+                            <div>
+                                <h4>Professional Photography</h4>
+                                <p>Capturing high-quality event photos and creating visual content for 
+                                church publications, social media, and promotional materials.</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="highlight-item">
-                        <i class="fas fa-camera"></i>
-                        <div>
-                            <h4>Professional Photography</h4>
-                            <p>Capturing high-quality event photos and creating visual content for 
-                            church publications, social media, and promotional materials.</p>
+                    <div class="production-stats">
+                        <div class="production-stat">
+                            <div class="number">Live</div>
+                            <div class="label">Streaming</div>
+                        </div>
+                        <div class="production-stat">
+                            <div class="number">Multi</div>
+                            <div class="label">Camera Setup</div>
+                        </div>
+                        <div class="production-stat">
+                            <div class="number">HD</div>
+                            <div class="label">Quality</div>
+                        </div>
+                        <div class="production-stat">
+                            <div class="number">Creative</div>
+                            <div class="label">Production</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="production-stats">
-                    <div class="production-stat">
-                        <div class="number">Live</div>
-                        <div class="label">Streaming</div>
+                <div class="video-gallery">
+                    <div class="gallery-item">
+                        <img src="assets/images/Livestreamer.jpg" alt="Live Streaming Setup" class="gallery-image" id="galleryImg1">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-title">Live Streaming Control</h4>
+                            <p class="gallery-description">Managing broadcast operations in real-time</p>
+                        </div>
                     </div>
-                    <div class="production-stat">
-                        <div class="number">Multi</div>
-                        <div class="label">Camera Setup</div>
+                    
+                    <div class="gallery-item">
+                        <img src="assets/images/Videoshooting 2.jpg" alt="Video Production Setup" class="gallery-image" id="galleryImg2">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-title">Multi-Camera Setup</h4>
+                            <p class="gallery-description">Professional camera configuration for services</p>
+                        </div>
                     </div>
-                    <div class="production-stat">
-                        <div class="number">HD</div>
-                        <div class="label">Quality</div>
+                    
+                    <div class="gallery-item">
+                        <img src="assets/images/Videoshooting 3.jpg" alt="Photography Session" class="gallery-image" id="galleryImg3">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-title">Event Photography</h4>
+                            <p class="gallery-description">Capturing moments with professional equipment</p>
+                        </div>
                     </div>
-                    <div class="production-stat">
-                        <div class="number">Creative</div>
-                        <div class="label">Production</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="video-gallery">
-                <div class="gallery-item">
-                    <img src="assets/images/Livestreamer.jpg" alt="Live Streaming Setup" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Live Streaming Control</h4>
-                        <p class="gallery-description">Managing broadcast operations in real-time</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="assets/images/Videoshooting 2.jpg" alt="Video Production Setup" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Multi-Camera Setup</h4>
-                        <p class="gallery-description">Professional camera configuration for services</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="assets/images/Videoshooting 3.jpg" alt="Photography Session" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Event Photography</h4>
-                        <p class="gallery-description">Capturing moments with professional equipment</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="assets/images/Videoshooting1.jpg" alt="Production Equipment" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Production Equipment</h4>
-                        <p class="gallery-description">Professional gear for quality production</p>
+                    
+                    <div class="gallery-item">
+                        <img src="assets/images/Videoshooting1.jpg" alt="Production Equipment" class="gallery-image" id="galleryImg4">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-title">Production Equipment</h4>
+                            <p class="gallery-description">Professional gear for quality production</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-
-    <!-- Achievements Section - Text Only -->
+    <!-- Achievements Section -->
     <section class="achievements" id="achievements">
         <div class="container">
             <h2 class="section-title">
@@ -319,7 +337,7 @@
                 <div class="achievement-content">
                     <h3 class="achievement-title">STEM Ambassador - e3empower KOICA</h3>
                     <p class="achievement-description">
-                        Recognized for dedicated efforts in educating and nurturing local students in STEM fields
+                        Recognized for dedicated efforts in educating and nurturing young students in STEM fields
                         through the "Empower One, Empower Village" initiative supported by Korean International Cooperation Agency.
                     </p>
                     <div class="achievement-highlights">
@@ -477,10 +495,10 @@
                             <span class="tech-tag">Analytics</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link">
+                            <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link" id="churchAppDemoLink">
                                 <i class="fas fa-external-link-alt"></i> Live Demo
                             </a>
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" id="churchAppCodeLink">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -512,10 +530,10 @@
                             <span class="tech-tag">Python</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" id="rentwiseDemoLink">
                                 <i class="fas fa-external-link-alt"></i> View Platform
                             </a>
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" id="rentwiseCodeLink">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -546,10 +564,10 @@
                             <span class="tech-tag">AI</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" id="aiProjectsLink">
                                 <i class="fas fa-external-link-alt"></i> View Projects
                             </a>
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" id="aiRepoLink">
                                 <i class="fab fa-github"></i> Repository
                             </a>
                         </div>
@@ -775,13 +793,34 @@
             <h2 class="section-title">
                 <i class="fas fa-network-wired"></i> Let's Connect & Collaborate
             </h2>
+            
+            <!-- Contact Options -->
+            <div class="contact-options">
+                <div class="contact-option">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>safaribright93@gmail.com</p>
+                    <a href="mailto:safaribright93@gmail.com" class="contact-option-btn" id="directEmailBtn">Send Email</a>
+                </div>
+                <div class="contact-option">
+                    <i class="fas fa-phone"></i>
+                    <h3>SMS/WhatsApp</h3>
+                    <p>+255 748 042 678</p>
+                    <a href="https://wa.me/255748042678" target="_blank" class="contact-option-btn" id="whatsappBtn">Message on WhatsApp</a>
+                </div>
+                <div class="contact-option">
+                    <i class="fas fa-paper-plane"></i>
+                    <h3>Web Form</h3>
+                    <p>Fill the form below</p>
+                    <button class="contact-option-btn" id="scrollToFormBtn">Go to Form</button>
+                </div>
+            </div>
+
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3 class="contact-subtitle">Connect With Me</h3>
+                    <h3 class="contact-subtitle">Direct Contact Methods</h3>
                     <p class="contact-description">
-                        I'm always excited to discuss technology, AI innovations, cybersecurity, 
-                        potential collaborations, or emerging tech trends. Whether you're a fellow student, 
-                        industry professional, or tech enthusiast, let's connect and explore opportunities!
+                        Choose your preferred way to reach me. All methods work instantly!
                     </p>
                     <div class="contact-details">
                         <div class="contact-item">
@@ -789,6 +828,16 @@
                             <div>
                                 <h4>Email</h4>
                                 <p>safaribright93@gmail.com</p>
+                                <a href="mailto:safaribright93@gmail.com" class="contact-link" id="emailLink2">Click to email directly</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone/SMS/WhatsApp</h4>
+                                <p>+255 748 042 678</p>
+                                <a href="https://wa.me/255748042678" target="_blank" class="contact-link" id="whatsappLink">WhatsApp</a> • 
+                                <a href="sms:+255748042678" class="contact-link" id="smsLink">SMS</a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -799,54 +848,99 @@
                             </div>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-graduation-cap"></i>
+                            <i class="fas fa-clock"></i>
                             <div>
-                                <h4>Education</h4>
-                                <p>University of Cape Town (Computer Science & AI)</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-code"></i>
-                            <div>
-                                <h4>Interests</h4>
-                                <p>AI/ML • Full-Stack Dev • Cybersecurity • SaaS Platforms</p>
+                                <h4>Response Time</h4>
+                                <p>Usually within 24 hours</p>
                             </div>
                         </div>
                     </div>
-                    <div class="contact-social">
-                        <a href="https://github.com/Safari-bts" target="_blank" class="social-link-large">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/bright-safari-345833272/" target="_blank" class="social-link-large">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
-                        </a>
+                    
+                    <div class="contact-tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <p><strong>Pro Tip:</strong> For urgent matters, WhatsApp or SMS is fastest!</p>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="contactForm">
+                
+                <div class="contact-form-container">
+                    <div class="form-header">
+                        <h3 class="contact-subtitle">Send Me a Message</h3>
+                        <p class="form-description">Fill out this form and I'll receive it immediately</p>
+                    </div>
+                    
+                    <form id="contactForm" action="https://formsubmit.co/safaribright93@gmail.com" method="POST" class="contact-form">
+                        <!-- FormSubmit Configuration -->
+                        <input type="hidden" name="_subject" value="New message from Portfolio!">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://brightsafari.space/thank-you.html">
+                        <input type="hidden" name="_autoresponse" value="Thank you for contacting Bright Safari! I'll get back to you within 24 hours. - Bright">
+                        
                         <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                            <label for="name">
+                                <i class="fas fa-user"></i> Full Name *
+                            </label>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            <label for="email">
+                                <i class="fas fa-envelope"></i> Email Address *
+                            </label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="What would you like to discuss?" required>
+                            <label for="phone">
+                                <i class="fas fa-phone"></i> Phone Number (Optional)
+                            </label>
+                            <input type="tel" id="phone" name="phone" placeholder="+255 XXX XXX XXX">
                         </div>
+                        
                         <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Hello Bright, I'd like to connect about..." required></textarea>
+                            <label for="subject">
+                                <i class="fas fa-tag"></i> Subject *
+                            </label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Select a topic</option>
+                                <option value="project">Project Collaboration</option>
+                                <option value="job">Job Opportunity</option>
+                                <option value="freelance">Freelance Work</option>
+                                <option value="partnership">Business Partnership</option>
+                                <option value="question">Technical Question</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn btn-primary ai-submit-btn">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                            <div class="ai-submit-effect"></div>
-                        </button>
+                        
+                        <div class="form-group">
+                            <label for="message">
+                                <i class="fas fa-comment"></i> Your Message *
+                            </label>
+                            <textarea id="message" name="message" rows="6" 
+                                      placeholder="Hello Bright, I'd like to connect with you about..." 
+                                      required></textarea>
+                        </div>
+                        
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="copyMe" name="copyMe">
+                            <label for="copyMe">Send me a copy of this message</label>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary ai-submit-btn" id="submitBtn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                                <div class="ai-submit-effect"></div>
+                            </button>
+                            <button type="reset" class="btn btn-secondary" id="clearFormBtn">
+                                <i class="fas fa-redo"></i> Clear Form
+                            </button>
+                        </div>
                     </form>
+                    
+                    <div class="form-note">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Your message will be sent directly to my email inbox instantly.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -864,11 +958,11 @@
                     <p>"Empowering innovation through technology and AI-driven solutions"</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#home" class="footer-link">Home</a>
-                    <a href="#about" class="footer-link">About</a>
-                    <a href="#achievements" class="footer-link">Achievements</a>
-                    <a href="#projects" class="footer-link">Projects</a>
-                    <a href="#contact" class="footer-link">Connect</a>
+                    <a href="#home" class="footer-link" id="footerHomeLink">Home</a>
+                    <a href="#about" class="footer-link" id="footerAboutLink">About</a>
+                    <a href="#achievements" class="footer-link" id="footerAchievementsLink">Achievements</a>
+                    <a href="#projects" class="footer-link" id="footerProjectsLink">Projects</a>
+                    <a href="#contact" class="footer-link" id="footerContactLink">Connect</a>
                 </div>
                 <div class="footer-certifications">
                     <span class="cert-badge">ICDL Certified</span>
@@ -877,11 +971,16 @@
                 </div>
                 <div class="footer-copyright">
                     <p>&copy; 2026 Bright Safari. All rights reserved.</p>
-                    <p>Portfolio hosted at <a href="https://brightsafari.space" class="footer-link">brightsafari.space</a></p>
+                    <p>Portfolio hosted at <a href="https://brightsafari.space" class="footer-link" id="portfolioLink">brightsafari.space</a></p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/255748042678" target="_blank" class="whatsapp-badge" id="floatingWhatsappBtn" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- AI Particles Background -->
     <div class="ai-particles" id="aiParticles"></div>

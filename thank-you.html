@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Sent Successfully | Bright Safari</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .thank-you-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .thank-you-content {
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid var(--neon-blue);
+            max-width: 600px;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        
+        .back-home {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .back-home:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="thank-you-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>Message Sent Successfully!</h1>
+            <p>Thank you for reaching out. I've received your message and will get back to you within 24 hours.</p>
+            <p>You should also receive a copy of your message at the email you provided.</p>
+            <a href="/" class="back-home">← Back to Portfolio</a>
+        </div>
+    </div>
+    
+    <script>
+        // Redirect after 10 seconds
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 10000);
+    </script>
+</body>
+</html>
