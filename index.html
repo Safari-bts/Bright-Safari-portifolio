@@ -4,17 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bright Safari | AI & Tech Portfolio</title>
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M1BLSXKPQ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-6M1BLSXKPQ');
-    </script>
-    <!-- End Google tag -->
-    
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,21 +13,33 @@
     <meta name="keywords" content="Bright Safari, Computer Science, AI, University of Cape Town, Full-stack Developer, SaaS, Next.js, React, Python, PostgreSQL, Cybersecurity, ICDL Certified, STEM Ambassador">
     <meta name="author" content="Bright Safari">
     <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            'page_title': document.title,
+            'page_location': window.location.href,
+            'send_page_view': true
+        });
+    </script>
+    <!-- End Google Analytics -->
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <a href="#" class="logo">Bright<span class="logo-accent">Safari</span></a>
+            <a href="#home" class="logo">Bright<span class="logo-accent">Safari</span></a>
             <div class="nav-links">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About</a>
-                <a href="#video-production" class="nav-link">Production</a>
-                <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#production" class="nav-link">Media</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#skills" class="nav-link">Skills</a>
-                <a href="#journey" class="nav-link">Journey</a>
-                <a href="#contact" class="nav-link">Connect</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -54,17 +55,21 @@
         <div class="mobile-menu-content">
             <a href="#home" class="mobile-nav-link">Home</a>
             <a href="#about" class="mobile-nav-link">About</a>
-            <a href="#video-production" class="mobile-nav-link">Production</a>
-            <a href="#achievements" class="mobile-nav-link">Achievements</a>
+            <a href="#production" class="mobile-nav-link">Media</a>
             <a href="#projects" class="mobile-nav-link">Projects</a>
             <a href="#skills" class="mobile-nav-link">Skills</a>
-            <a href="#journey" class="mobile-nav-link">Journey</a>
-            <a href="#contact" class="mobile-nav-link">Connect</a>
+            <a href="#achievements" class="mobile-nav-link">Achievements</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
             <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle">
                 <i class="fas fa-moon"></i> Toggle Theme
             </button>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -79,30 +84,21 @@
                         <span class="ai-highlight">AI-Powered Solutions</span>
                     </div>
                     <div class="hero-actions">
-                        <a href="#projects" class="btn btn-primary" id="viewProjectsBtn">
-                            <i class="fas fa-rocket"></i> View Projects
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-code"></i> View Projects
                         </a>
-                        <a href="#achievements" class="btn btn-secondary" id="viewAchievementsBtn">
-                            <i class="fas fa-trophy"></i> My Achievements
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Contact Me
                         </a>
                     </div>
                     <div class="hero-social">
-                        <a href="https://github.com/yourusername" class="social-link" id="githubLink">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/yourusername" class="social-link" id="linkedinLink">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://twitter.com/yourusername" class="social-link" id="twitterLink">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="mailto:safaribright93@gmail.com" class="social-link" id="emailLink">
-                            <i class="fas fa-envelope"></i>
-                        </a>
+                        <a href="https://github.com/yourusername" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/yourusername" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com/yourusername" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="mailto:safaribright93@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <!-- Circular Profile Picture -->
                     <div class="profile-picture-container">
                         <img src="assets/images/profile.jpg" alt="Bright Safari" class="profile-picture">
                         <div class="profile-picture-border"></div>
@@ -112,15 +108,41 @@
         </div>
     </section>
 
-    <!-- Animated Background Elements -->
-    <div class="ai-background-elements">
-        <div class="ai-node node-1"></div>
-        <div class="ai-node node-2"></div>
-        <div class="ai-node node-3"></div>
-        <div class="ai-node node-4"></div>
-        <div class="ai-node node-5"></div>
-        <div class="ai-circuit"></div>
-    </div>
+    <!-- Quick Stats -->
+    <section class="quick-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <i class="fas fa-certificate"></i>
+                    <div>
+                        <h3>10+</h3>
+                        <p>Certifications</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <div>
+                        <h3>2+</h3>
+                        <p>Live Projects</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <h3>UCT</h3>
+                        <p>CS & AI Student</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-video"></i>
+                    <div>
+                        <h3>Live</h3>
+                        <p>Production Expert</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- About Section -->
     <section class="about" id="about">
@@ -132,7 +154,7 @@
                 <div class="about-text">
                     <div class="ai-highlight-box">
                         <h3>Bachelor of Science in Computer Science & AI</h3>
-                        <p>University of Cape Town, South Africa</p>
+                        <p>University of Cape Town</p>
                     </div>
                     
                     <p>
@@ -143,18 +165,13 @@
                     <p>
                         With guidance from professional mentors in the field and leveraging AI as an assistant tool, 
                         I've developed practical applications including a fully functional 
-                        <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link-inline" id="churchAppLink">Church Attendance App</a> 
-                        and the innovative <strong>Rentwise platform</strong> using cutting-edge technologies.
+                        <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link-inline">Church Attendance App</a>.
                     </p>
                     <p>
                         My high school journey was marked by significant achievements including leadership roles, 
                         discipline recognition, project-based merits, participation in the Boeing Innovation Camp, 
                         and earning the prestigious <strong>ICDL Digital Skills Certificate</strong> with expertise in 
                         10 key digital domains.
-                    </p>
-                    <p>
-                        I believe in continuous learning and innovation, constantly pushing boundaries to develop 
-                        solutions that make a real difference in people's lives.
                     </p>
                     
                     <div class="tech-passions">
@@ -163,123 +180,17 @@
                             <span class="passion-tag">AI & Machine Learning</span>
                             <span class="passion-tag">Full-Stack Development</span>
                             <span class="passion-tag">Cybersecurity</span>
-                            <span class="passion-tag">Data Science</span>
-                            <span class="passion-tag">Cloud Computing</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-stats">
-                    <div class="stat-card ai-stat">
-                        <h3 class="stat-number">10</h3>
-                        <p class="stat-label">ICDL Certifications</p>
-                        <div class="ai-sparkle"></div>
-                    </div>
-                    <div class="stat-card ai-stat">
-                        <h3 class="stat-number">2</h3>
-                        <p class="stat-label">Live Projects</p>
-                        <div class="ai-sparkle"></div>
-                    </div>
-                    <div class="stat-card ai-stat">
-                        <h3 class="stat-number">STEM</h3>
-                        <p class="stat-label">Ambassador</p>
-                        <div class="ai-sparkle"></div>
-                    </div>
-                    <div class="stat-card ai-stat">
-                        <h3 class="stat-number">AI</h3>
-                        <p class="stat-label">Mentored</p>
-                        <div class="ai-sparkle"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Video Photography Section -->
-    <section class="video-production" id="video-production">
-        <div class="container">
-            <h2 class="section-title">
-                <i class="fas fa-video"></i> Live Production & Media
-            </h2>
-            <div class="production-content">
-                <div class="production-text">
-                    <h3><i class="fas fa-broadcast-tower"></i> Church Live Streaming & Video Production</h3>
-                    <p class="production-description">
-                        Beyond software development, I've been actively involved in live video production 
-                        and photography for TAG ICC Dodoma Church. Combining technical expertise with 
-                        creative vision, I manage live streaming setups, multi-camera operations, and 
-                        post-production editing to deliver professional-quality broadcasts.
-                    </p>
-                    
-                    <div class="production-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-satellite-dish"></i>
-                            <div>
-                                <h4>Live Streaming Operations</h4>
-                                <p>Managing real-time broadcast setup with OBS Studio, multi-camera switching, 
-                                and audio mixing for church services reaching hundreds of viewers online.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <i class="fas fa-camera"></i>
-                            <div>
-                                <h4>Professional Photography</h4>
-                                <p>Capturing high-quality event photos and creating visual content for 
-                                church publications, social media, and promotional materials.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="production-stats">
-                        <div class="production-stat">
-                            <div class="number">Live</div>
-                            <div class="label">Streaming</div>
-                        </div>
-                        <div class="production-stat">
-                            <div class="number">Multi</div>
-                            <div class="label">Camera Setup</div>
-                        </div>
-                        <div class="production-stat">
-                            <div class="number">HD</div>
-                            <div class="label">Quality</div>
-                        </div>
-                        <div class="production-stat">
-                            <div class="number">Creative</div>
-                            <div class="label">Production</div>
+                            <span class="passion-tag">Live Production</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="video-gallery">
-                    <div class="gallery-item">
-                        <img src="assets/images/Livestreamer.jpg" alt="Live Streaming Setup" class="gallery-image" id="galleryImg1">
-                        <div class="gallery-overlay">
-                            <h4 class="gallery-title">Live Streaming Control</h4>
-                            <p class="gallery-description">Managing broadcast operations in real-time</p>
-                        </div>
-                    </div>
-                    
-                    <div class="gallery-item">
-                        <img src="assets/images/Videoshooting 2.jpg" alt="Video Production Setup" class="gallery-image" id="galleryImg2">
-                        <div class="gallery-overlay">
-                            <h4 class="gallery-title">Multi-Camera Setup</h4>
-                            <p class="gallery-description">Professional camera configuration for services</p>
-                        </div>
-                    </div>
-                    
-                    <div class="gallery-item">
-                        <img src="assets/images/Videoshooting 3.jpg" alt="Photography Session" class="gallery-image" id="galleryImg3">
-                        <div class="gallery-overlay">
-                            <h4 class="gallery-title">Event Photography</h4>
-                            <p class="gallery-description">Capturing moments with professional equipment</p>
-                        </div>
-                    </div>
-                    
-                    <div class="gallery-item">
-                        <img src="assets/images/Videoshooting1.jpg" alt="Production Equipment" class="gallery-image" id="galleryImg4">
-                        <div class="gallery-overlay">
-                            <h4 class="gallery-title">Production Equipment</h4>
-                            <p class="gallery-description">Professional gear for quality production</p>
+                <div class="boeing-card">
+                    <div class="boeing-image">
+                        <img src="assets/images/Boeing Innovation camp.jpg" alt="Boeing Innovation Camp" class="boeing-img">
+                        <div class="boeing-overlay">
+                            <h4>Boeing Innovation Camp</h4>
+                            <p>Aerospace Innovation Session Participant</p>
                         </div>
                     </div>
                 </div>
@@ -287,177 +198,55 @@
         </div>
     </section>
 
-    <!-- Achievements Section -->
-    <section class="achievements" id="achievements">
+    <!-- Media Production Section -->
+    <section class="media-production" id="production">
         <div class="container">
             <h2 class="section-title">
-                <i class="fas fa-trophy"></i> Certifications & Achievements
+                <i class="fas fa-video"></i> Media & Production
             </h2>
-            
-            <!-- ICDL Certificate -->
-            <div class="achievement-card ai-certificate">
-                <div class="certificate-badge">
-                    <i class="fas fa-certificate"></i>
-                    <span>ICDL Certified</span>
-                </div>
-                <div class="achievement-content">
-                    <h3 class="achievement-title">ICDL Africa Digital Skills Standard</h3>
-                    <p class="achievement-description">
-                        Successfully completed 10 professional modules demonstrating comprehensive digital proficiency. 
-                        Certified by ICDL Africa, the global digital skills standard recognized worldwide.
+            <div class="media-content">
+                <div class="media-text">
+                    <h3><i class="fas fa-broadcast-tower"></i> Church Live Streaming & Video Production</h3>
+                    <p class="media-description">
+                        Beyond software development, I manage live video production for TAG ICC Dodoma Church. 
+                        Combining technical expertise with creative vision, I handle live streaming setups 
+                        and professional equipment management for high-quality broadcasts.
                     </p>
-                    <div class="certificate-modules">
-                        <h4>Completed Modules:</h4>
-                        <div class="modules-grid">
-                            <div class="module-item">Computer & Online Essentials</div>
-                            <div class="module-item">Online Collaboration</div>
-                            <div class="module-item">Presentation</div>
-                            <div class="module-item">Spreadsheets</div>
-                            <div class="module-item">Documents</div>
-                            <div class="module-item">Robotics</div>
-                            <div class="module-item">Image Editing</div>
-                            <div class="module-item">Artificial Intelligence</div>
-                            <div class="module-item">Digital Marketing</div>
-                            <div class="module-item">Cyber Security</div>
-                        </div>
-                    </div>
-                    <div class="achievement-meta">
-                        <span><i class="far fa-calendar"></i> Completed: 2024-2025</span>
-                        <span><i class="fas fa-award"></i> Issued by: ICDL Africa</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STEM Ambassador Certificate -->
-            <div class="achievement-card stem-certificate">
-                <div class="certificate-badge">
-                    <i class="fas fa-atom"></i>
-                    <span>STEM Ambassador</span>
-                </div>
-                <div class="achievement-content">
-                    <h3 class="achievement-title">STEM Ambassador - e3empower KOICA</h3>
-                    <p class="achievement-description">
-                        Recognized for dedicated efforts in educating and nurturing young students in STEM fields
-                        through the "Empower One, Empower Village" initiative supported by Korean International Cooperation Agency.
-                    </p>
-                    <div class="achievement-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                            <span>Student Education & Mentorship</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-hands-helping"></i>
-                            <span>Community Empowerment</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-globe-africa"></i>
-                            <span>International Collaboration</span>
-                        </div>
-                    </div>
-                    <div class="achievement-meta">
-                        <span><i class="far fa-calendar"></i> Awarded: 6 April, 2023</span>
-                        <span><i class="fas fa-building"></i> Issued by: e3empower Africa & KOICA</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Leadership Certificate -->
-            <div class="achievement-card leadership-certificate">
-                <div class="certificate-badge">
-                    <i class="fas fa-flag"></i>
-                    <span>Leadership Excellence</span>
-                </div>
-                <div class="achievement-content">
-                    <h3 class="achievement-title">Certificate of Excellence in Leadership</h3>
-                    <p class="achievement-description">
-                        Honored for upholding exemplary discipline, integrity, and leadership as a role model
-                        among male students at Arusha Science School.
-                    </p>
-                    <div class="leadership-qualities">
-                        <h4>Recognized Qualities:</h4>
-                        <div class="qualities-list">
-                            <div class="quality-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Exemplary Discipline</span>
+                    
+                    <div class="media-highlights">
+                        <div class="media-item">
+                            <i class="fas fa-satellite-dish"></i>
+                            <div>
+                                <h4>Live Streaming Control</h4>
+                                <p>Managing real-time broadcast setup with OBS Studio and multi-camera switching</p>
                             </div>
-                            <div class="quality-item">
-                                <i class="fas fa-gem"></i>
-                                <span>Integrity</span>
-                            </div>
-                            <div class="quality-item">
-                                <i class="fas fa-user-tie"></i>
-                                <span>Role Model Leadership</span>
+                        </div>
+                        
+                        <div class="media-item">
+                            <i class="fas fa-cogs"></i>
+                            <div>
+                                <h4>Production Equipment</h4>
+                                <p>Professional gear setup and management for quality video production</p>
                             </div>
                         </div>
                     </div>
-                    <div class="achievement-meta">
-                        <span><i class="far fa-calendar"></i> Awarded: 8th February, 2025</span>
-                        <span><i class="fas fa-school"></i> Issued by: Arusha Science School</span>
-                    </div>
                 </div>
-            </div>
-
-            <!-- Discipline Certificate -->
-            <div class="achievement-card discipline-certificate">
-                <div class="certificate-badge">
-                    <i class="fas fa-medal"></i>
-                    <span>Discipline & Excellence</span>
-                </div>
-                <div class="achievement-content">
-                    <h3 class="achievement-title">Certificate of Appreciation for Academic Excellence</h3>
-                    <p class="achievement-description">
-                        Recognized for promoting academic excellence and fostering a culture of intellectual growth
-                        among students, ensuring a bright future for all at Arusha Science School.
-                    </p>
-                    <div class="achievement-impact">
-                        <h4>Impact Created:</h4>
-                        <ul class="impact-list">
-                            <li>Promoted academic excellence among peers</li>
-                            <li>Fostered intellectual growth culture</li>
-                            <li>Contributed to positive learning environment</li>
-                            <li>Inspired future-focused education</li>
-                        </ul>
-                    </div>
-                    <div class="achievement-meta">
-                        <span><i class="far fa-calendar"></i> Awarded: 2025</span>
-                        <span><i class="fas fa-school"></i> Issued by: Arusha Science School</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Achievements -->
-            <div class="additional-achievements">
-                <h3 class="additional-title">
-                    <i class="fas fa-stars"></i> Additional Milestones
-                </h3>
-                <div class="milestones-grid">
-                    <div class="milestone-card">
-                        <div class="milestone-icon">
-                            <i class="fas fa-plane"></i>
+                
+                <div class="media-gallery">
+                    <div class="gallery-item">
+                        <img src="assets/images/Livestreamer.jpg" alt="Live Streaming Control" class="gallery-img">
+                        <div class="gallery-caption">
+                            <h4>Live Streaming Control</h4>
+                            <p>Broadcast operations management</p>
                         </div>
-                        <h4>Boeing Innovation Camp</h4>
-                        <p>Participated in aerospace innovation sessions with industry experts</p>
                     </div>
-                    <div class="milestone-card">
-                        <div class="milestone-icon">
-                            <i class="fas fa-project-diagram"></i>
+                    
+                    <div class="gallery-item">
+                        <img src="assets/images/Videoshooting1.jpg" alt="Production Equipment" class="gallery-img">
+                        <div class="gallery-caption">
+                            <h4>Production Equipment</h4>
+                            <p>Professional video setup</p>
                         </div>
-                        <h4>Project-Based Merits</h4>
-                        <p>Recognized for innovative project work and technical solutions</p>
-                    </div>
-                    <div class="milestone-card">
-                        <div class="milestone-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h4>University of Cape Town</h4>
-                        <p>Computer Science & AI Degree Program admission</p>
-                    </div>
-                    <div class="milestone-card">
-                        <div class="milestone-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h4>AI Assistant Projects</h4>
-                        <p>Developed multiple AI-mentored applications and solutions</p>
                     </div>
                 </div>
             </div>
@@ -471,22 +260,25 @@
                 <i class="fas fa-code"></i> My Projects
             </h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card ai-project">
-                    <div class="project-image">
-                        <div class="project-image-placeholder">
-                            <i class="fas fa-church"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
+                <!-- Church Attendance App -->
+                <div class="project-card">
+                    <div class="project-header">
                         <div class="project-badge">
                             <i class="fas fa-rocket"></i> Live Project
                         </div>
                         <h3 class="project-title">Church Attendance App</h3>
+                    </div>
+                    
+                    <div class="project-image">
+                        <div class="project-icon">
+                            <i class="fas fa-church"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
                         <p class="project-description">
                             A fully functional church attendance management system with real-time tracking,
-                            member database, and analytics dashboard. Built with modern web technologies
-                            and deployed for public use.
+                            member database, and analytics dashboard. Built with modern web technologies.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">Full-Stack</span>
@@ -495,32 +287,32 @@
                             <span class="tech-tag">Analytics</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link" id="churchAppDemoLink">
+                            <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link">
                                 <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link" id="churchAppCodeLink">
-                                <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card ai-project">
+                <!-- Full-Stack Development -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-badge">
+                            <i class="fas fa-server"></i> Backend
+                        </div>
+                        <h3 class="project-title">Full-Stack Development</h3>
+                    </div>
+                    
                     <div class="project-image">
-                        <div class="project-image-placeholder">
-                            <i class="fas fa-home"></i>
+                        <div class="project-icon">
+                            <i class="fas fa-laptop-code"></i>
                         </div>
                     </div>
+                    
                     <div class="project-content">
-                        <div class="project-badge">
-                            <i class="fas fa-bolt"></i> SaaS Platform
-                        </div>
-                        <h3 class="project-title">Rentwise Platform</h3>
                         <p class="project-description">
-                            A comprehensive property management SaaS platform built with Next.js, React,
-                            Fast API Python, and PostgreSQL. Features include tenant management, payment
-                            processing, and automated reporting.
+                            Experience in building scalable web applications using modern technologies 
+                            including Next.js, React, Fast API Python, and PostgreSQL.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">Next.js</span>
@@ -530,45 +322,8 @@
                             <span class="tech-tag">Python</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" id="rentwiseDemoLink">
-                                <i class="fas fa-external-link-alt"></i> View Platform
-                            </a>
-                            <a href="#" class="project-link" id="rentwiseCodeLink">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card ai-project">
-                    <div class="project-image">
-                        <div class="project-image-placeholder">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-badge">
-                            <i class="fas fa-brain"></i> AI Projects
-                        </div>
-                        <h3 class="project-title">AI Learning Portfolio</h3>
-                        <p class="project-description">
-                            A collection of machine learning and AI projects exploring various algorithms
-                            and implementations. Includes neural networks, natural language processing,
-                            and computer vision applications.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">AI</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link" id="aiProjectsLink">
-                                <i class="fas fa-external-link-alt"></i> View Projects
-                            </a>
-                            <a href="#" class="project-link" id="aiRepoLink">
-                                <i class="fab fa-github"></i> Repository
+                            <a href="#skills" class="project-link">
+                                <i class="fas fa-cogs"></i> View Skills
                             </a>
                         </div>
                     </div>
@@ -583,98 +338,114 @@
             <h2 class="section-title">
                 <i class="fas fa-cogs"></i> Skills & Technologies
             </h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3 class="skill-category-title">
-                        <i class="fas fa-laptop-code"></i> Frontend Development
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Next.js</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 85%"></div>
+            
+            <div class="skills-accordion">
+                <!-- Frontend Skills -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Frontend Development</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span class="skill-name">Next.js</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 85%"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">React</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%"></div>
+                            <div class="skill-item">
+                                <span class="skill-name">React</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 80%"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">HTML/CSS</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 90%"></div>
+                            <div class="skill-item">
+                                <span class="skill-name">HTML/CSS</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 90%"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">JavaScript</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 75%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="skill-category-title">
-                        <i class="fas fa-server"></i> Backend & Database
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Fast API (Python)</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">PostgreSQL</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">REST APIs</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 85%"></div>
+                            <div class="skill-item">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 75%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <h3 class="skill-category-title">
-                        <i class="fas fa-tools"></i> Tools & Certifications
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">ICDL Certified</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 95%"></div>
+                <!-- Backend Skills -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <i class="fas fa-server"></i>
+                        <span>Backend & Database</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span class="skill-name">Fast API (Python)</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">PostgreSQL</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">REST APIs</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 85%"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Git & GitHub</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%"></div>
+                    </div>
+                </div>
+
+                <!-- Tools & Certifications -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <i class="fas fa-tools"></i>
+                        <span>Tools & Certifications</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span class="skill-name">ICDL Certified</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 95%"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Cybersecurity</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 70%"></div>
+                            <div class="skill-item">
+                                <span class="skill-name">Git & GitHub</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 80%"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">AI/ML Concepts</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 75%"></div>
+                            <div class="skill-item">
+                                <span class="skill-name">Cybersecurity</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Video Production</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 75%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -716,71 +487,71 @@
         </div>
     </section>
 
-    <!-- Journey Section -->
-    <section class="journey" id="journey">
+    <!-- Achievements Section -->
+    <section class="achievements" id="achievements">
         <div class="container">
             <h2 class="section-title">
-                <i class="fas fa-road"></i> My Tech Journey
+                <i class="fas fa-trophy"></i> Achievements
             </h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2026</div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">University of Cape Town</h3>
-                        <p class="timeline-description">
-                            Pursuing Bachelor of Science in Computer Science & Artificial Intelligence.
-                            Focusing on algorithms, machine learning, and software engineering.
-                        </p>
-                        <div class="timeline-tags">
-                            <span class="timeline-tag">Computer Science</span>
-                            <span class="timeline-tag">AI Major</span>
-                            <span class="timeline-tag">Higher Education</span>
-                        </div>
+            
+            <div class="achievements-grid">
+                <!-- ICDL Certificate -->
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="achievement-title">ICDL Africa Digital Skills</h3>
+                    <p class="achievement-description">
+                        10 professional modules completed including AI, Cybersecurity, and Digital Marketing
+                    </p>
+                    <div class="achievement-tags">
+                        <span class="achievement-tag">Certified</span>
+                        <span class="achievement-tag">10 Modules</span>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2024 - 2025</div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">ICDL Certification & High School Excellence</h3>
-                        <p class="timeline-description">
-                            Earned ICDL certification in 10 digital skills modules. Recognized for leadership,
-                            discipline, and STEM ambassadorship. Developed first major projects.
-                        </p>
-                        <div class="timeline-tags">
-                            <span class="timeline-tag">ICDL Certified</span>
-                            <span class="timeline-tag">STEM Ambassador</span>
-                            <span class="timeline-tag">Leadership</span>
-                        </div>
+
+                <!-- STEM Ambassador -->
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3 class="achievement-title">STEM Ambassador</h3>
+                    <p class="achievement-description">
+                        Recognized for educating and nurturing local students in STEM fields
+                    </p>
+                    <div class="achievement-tags">
+                        <span class="achievement-tag">e3empower KOICA</span>
+                        <span class="achievement-tag">2023</span>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2023</div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">STEM Education & Early Projects</h3>
-                        <p class="timeline-description">
-                            Appointed STEM Ambassador by e3empower KOICA. Started exploring programming
-                            and web technologies. Participated in Boeing Innovation Camp.
-                        </p>
-                        <div class="timeline-tags">
-                            <span class="timeline-tag">STEM</span>
-                            <span class="timeline-tag">Education</span>
-                            <span class="timeline-tag">Innovation</span>
-                        </div>
+
+                <!-- Leadership Excellence -->
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <h3 class="achievement-title">Leadership Excellence</h3>
+                    <p class="achievement-description">
+                        Exemplary discipline and leadership as a role model at Arusha Science School
+                    </p>
+                    <div class="achievement-tags">
+                        <span class="achievement-tag">Arusha Science</span>
+                        <span class="achievement-tag">2025</span>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2022-2023</div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">Tech Passion Discovery</h3>
-                        <p class="timeline-description">
-                            Discovered passion for technology and programming. Started learning
-                            basic coding concepts and exploring AI possibilities.
-                        </p>
-                        <div class="timeline-tags">
-                            <span class="timeline-tag">Beginning</span>
-                            <span class="timeline-tag">Learning</span>
-                            <span class="timeline-tag">Discovery</span>
-                        </div>
+
+                <!-- Boeing Innovation -->
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3 class="achievement-title">Boeing Innovation Camp</h3>
+                    <p class="achievement-description">
+                        Participated in aerospace innovation sessions with industry experts
+                    </p>
+                    <div class="achievement-tags">
+                        <span class="achievement-tag">Innovation</span>
+                        <span class="achievement-tag">Aerospace</span>
                     </div>
                 </div>
             </div>
@@ -791,36 +562,36 @@
     <section class="contact" id="contact">
         <div class="container">
             <h2 class="section-title">
-                <i class="fas fa-network-wired"></i> Let's Connect & Collaborate
+                <i class="fas fa-network-wired"></i> Let's Connect
             </h2>
             
-            <!-- Contact Options -->
             <div class="contact-options">
                 <div class="contact-option">
                     <i class="fas fa-envelope"></i>
                     <h3>Email</h3>
                     <p>safaribright93@gmail.com</p>
-                    <a href="mailto:safaribright93@gmail.com" class="contact-option-btn" id="directEmailBtn">Send Email</a>
+                    <a href="mailto:safaribright93@gmail.com" class="contact-option-btn">Send Email</a>
+                </div>
+                <div class="contact-option">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p>+255 748 042 678</p>
+                    <a href="https://wa.me/255748042678" target="_blank" class="contact-option-btn">Message</a>
                 </div>
                 <div class="contact-option">
                     <i class="fas fa-phone"></i>
-                    <h3>SMS/WhatsApp</h3>
+                    <h3>SMS</h3>
                     <p>+255 748 042 678</p>
-                    <a href="https://wa.me/255748042678" target="_blank" class="contact-option-btn" id="whatsappBtn">Message on WhatsApp</a>
-                </div>
-                <div class="contact-option">
-                    <i class="fas fa-paper-plane"></i>
-                    <h3>Web Form</h3>
-                    <p>Fill the form below</p>
-                    <button class="contact-option-btn" id="scrollToFormBtn">Go to Form</button>
+                    <a href="sms:+255748042678" class="contact-option-btn">Send SMS</a>
                 </div>
             </div>
 
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3 class="contact-subtitle">Direct Contact Methods</h3>
+                    <h3 class="contact-subtitle">Get In Touch</h3>
                     <p class="contact-description">
-                        Choose your preferred way to reach me. All methods work instantly!
+                        I'm always excited to discuss technology, AI innovations, cybersecurity, 
+                        or potential collaborations. Let's connect and explore opportunities!
                     </p>
                     <div class="contact-details">
                         <div class="contact-item">
@@ -828,7 +599,6 @@
                             <div>
                                 <h4>Email</h4>
                                 <p>safaribright93@gmail.com</p>
-                                <a href="mailto:safaribright93@gmail.com" class="contact-link" id="emailLink2">Click to email directly</a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -836,8 +606,6 @@
                             <div>
                                 <h4>Phone/SMS/WhatsApp</h4>
                                 <p>+255 748 042 678</p>
-                                <a href="https://wa.me/255748042678" target="_blank" class="contact-link" id="whatsappLink">WhatsApp</a> • 
-                                <a href="sms:+255748042678" class="contact-link" id="smsLink">SMS</a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -848,39 +616,27 @@
                             </div>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-clock"></i>
+                            <i class="fas fa-graduation-cap"></i>
                             <div>
-                                <h4>Response Time</h4>
-                                <p>Usually within 24 hours</p>
+                                <h4>Education</h4>
+                                <p>University of Cape Town</p>
+                                <p>Computer Science & AI</p>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="contact-tip">
-                        <i class="fas fa-lightbulb"></i>
-                        <p><strong>Pro Tip:</strong> For urgent matters, WhatsApp or SMS is fastest!</p>
                     </div>
                 </div>
                 
                 <div class="contact-form-container">
-                    <div class="form-header">
-                        <h3 class="contact-subtitle">Send Me a Message</h3>
-                        <p class="form-description">Fill out this form and I'll receive it immediately</p>
-                    </div>
-                    
-                    <form id="contactForm" action="https://formsubmit.co/safaribright93@gmail.com" method="POST" class="contact-form">
-                        <!-- FormSubmit Configuration -->
+                    <form id="contactForm" action="https://formsubmit.co/safaribright93@gmail.com" method="POST">
                         <input type="hidden" name="_subject" value="New message from Portfolio!">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="https://brightsafari.space/thank-you.html">
-                        <input type="hidden" name="_autoresponse" value="Thank you for contacting Bright Safari! I'll get back to you within 24 hours. - Bright">
                         
                         <div class="form-group">
                             <label for="name">
                                 <i class="fas fa-user"></i> Full Name *
                             </label>
-                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
                         </div>
                         
                         <div class="form-group">
@@ -891,56 +647,18 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="phone">
-                                <i class="fas fa-phone"></i> Phone Number (Optional)
-                            </label>
-                            <input type="tel" id="phone" name="phone" placeholder="+255 XXX XXX XXX">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">
-                                <i class="fas fa-tag"></i> Subject *
-                            </label>
-                            <select id="subject" name="subject" required>
-                                <option value="" disabled selected>Select a topic</option>
-                                <option value="project">Project Collaboration</option>
-                                <option value="job">Job Opportunity</option>
-                                <option value="freelance">Freelance Work</option>
-                                <option value="partnership">Business Partnership</option>
-                                <option value="question">Technical Question</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
                             <label for="message">
                                 <i class="fas fa-comment"></i> Your Message *
                             </label>
-                            <textarea id="message" name="message" rows="6" 
-                                      placeholder="Hello Bright, I'd like to connect with you about..." 
+                            <textarea id="message" name="message" rows="4" 
+                                      placeholder="Hello Bright, I'd like to connect about..." 
                                       required></textarea>
                         </div>
                         
-                        <div class="form-checkbox">
-                            <input type="checkbox" id="copyMe" name="copyMe">
-                            <label for="copyMe">Send me a copy of this message</label>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary ai-submit-btn" id="submitBtn">
-                                <i class="fas fa-paper-plane"></i> Send Message
-                                <div class="ai-submit-effect"></div>
-                            </button>
-                            <button type="reset" class="btn btn-secondary" id="clearFormBtn">
-                                <i class="fas fa-redo"></i> Clear Form
-                            </button>
-                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
                     </form>
-                    
-                    <div class="form-note">
-                        <i class="fas fa-info-circle"></i>
-                        <p>Your message will be sent directly to my email inbox instantly.</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -951,41 +669,40 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <a href="#" class="logo">Bright<span class="logo-accent">Safari</span></a>
+                    <a href="#home" class="logo">Bright<span class="logo-accent">Safari</span></a>
                     <p class="footer-tagline">Computer Scientist & AI Innovator</p>
                 </div>
-                <div class="footer-quote">
-                    <p>"Empowering innovation through technology and AI-driven solutions"</p>
-                </div>
+                
                 <div class="footer-links">
-                    <a href="#home" class="footer-link" id="footerHomeLink">Home</a>
-                    <a href="#about" class="footer-link" id="footerAboutLink">About</a>
-                    <a href="#achievements" class="footer-link" id="footerAchievementsLink">Achievements</a>
-                    <a href="#projects" class="footer-link" id="footerProjectsLink">Projects</a>
-                    <a href="#contact" class="footer-link" id="footerContactLink">Connect</a>
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#about" class="footer-link">About</a>
+                    <a href="#production" class="footer-link">Media</a>
+                    <a href="#projects" class="footer-link">Projects</a>
+                    <a href="#skills" class="footer-link">Skills</a>
+                    <a href="#achievements" class="footer-link">Achievements</a>
+                    <a href="#contact" class="footer-link">Contact</a>
                 </div>
-                <div class="footer-certifications">
-                    <span class="cert-badge">ICDL Certified</span>
-                    <span class="cert-badge">STEM Ambassador</span>
-                    <span class="cert-badge">UCT Student</span>
+                
+                <div class="footer-social">
+                    <a href="https://github.com/yourusername" class="footer-social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/yourusername" class="footer-social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/yourusername" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="mailto:safaribright93@gmail.com" class="footer-social-link"><i class="fas fa-envelope"></i></a>
                 </div>
+                
                 <div class="footer-copyright">
                     <p>&copy; 2026 Bright Safari. All rights reserved.</p>
-                    <p>Portfolio hosted at <a href="https://brightsafari.space" class="footer-link" id="portfolioLink">brightsafari.space</a></p>
+                    <p>Portfolio hosted at <a href="https://brightsafari.space" class="footer-link">brightsafari.space</a></p>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/255748042678" target="_blank" class="whatsapp-badge" id="floatingWhatsappBtn" title="Chat on WhatsApp">
+    <a href="https://wa.me/255748042678" target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- AI Particles Background -->
-    <div class="ai-particles" id="aiParticles"></div>
-
     <script src="scripts/main.js"></script>
-    <script src="scripts/ai-effects.js"></script>
 </body>
 </html>
