@@ -1,6 +1,6 @@
 # Bright Titus Safari - Portfolio Website
 
-A modern, responsive portfolio website for Bright Titus Safari, a future Computer Science & AI student at the University of Cape Town.
+A modern, responsive portfolio website for Bright Titus Safari, a Bachelor degree major in Computer Science & AI student at the University of Cape Town.
 
 ## Features
 
