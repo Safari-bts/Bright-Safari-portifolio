@@ -1325,3 +1325,283 @@ h1, h2, h3, h4 {
         max-width: 1140px;
     }
 }
+
+/* AfrikaLearns Section */
+.afrikalearns {
+    padding: 8rem 0;
+    background: rgba(10, 10, 15, 0.6);
+    position: relative;
+}
+
+.afrikalearns::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.afrikalearns-content {
+    display: flex;
+    justify-content: center;
+}
+
+.afrikalearns-card {
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 20px;
+    padding: 3rem;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    backdrop-filter: blur(10px);
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.afrikalearns-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(34, 197, 94, 0.4);
+    box-shadow: 0 20px 40px rgba(34, 197, 94, 0.1);
+}
+
+.afrikalearns-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #22c55e, #3b82f6);
+}
+
+.program-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 20px;
+    padding: 0.5rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #22c55e;
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+}
+
+.program-badge i {
+    font-size: 1rem;
+}
+
+.afrikalearns-text h3 {
+    color: var(--neon-blue);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.afrikalearns-text h3 i {
+    color: #22c55e;
+}
+
+.afrikalearns-description {
+    color: #cbd5e1;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    padding-right: 1rem;
+}
+
+/* Program Highlights */
+.program-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.highlight-box {
+    background: rgba(34, 197, 94, 0.05);
+    border: 1px solid rgba(34, 197, 94, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(34, 197, 94, 0.05), transparent);
+    animation: shine 3s infinite;
+}
+
+.highlight-box:hover {
+    transform: translateY(-8px);
+    border-color: rgba(34, 197, 94, 0.3);
+    box-shadow: 0 15px 30px rgba(34, 197, 94, 0.1);
+}
+
+.highlight-box i {
+    font-size: 2.2rem;
+    color: #22c55e;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.highlight-box h4 {
+    color: white;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.highlight-box p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Program Links */
+.program-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.program-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    flex: 1;
+    min-width: 200px;
+    backdrop-filter: blur(10px);
+}
+
+.program-link:hover {
+    background: rgba(34, 197, 94, 0.2);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.program-link i {
+    font-size: 1.1rem;
+}
+
+/* Program Impact */
+.program-impact {
+    background: rgba(34, 197, 94, 0.05);
+    border: 1px solid rgba(34, 197, 94, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem 2rem;
+}
+
+.program-impact h4 {
+    color: #22c55e;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.program-impact h4 i {
+    animation: iconGlow 2s infinite alternate;
+}
+
+.impact-list {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+}
+
+.impact-list li {
+    color: #cbd5e1;
+    padding-left: 1.8rem;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.impact-list li::before {
+    content: '✓';
+    color: #22c55e;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Responsive Design for AfrikaLearns */
+@media (max-width: 992px) {
+    .program-highlights {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .impact-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .program-highlights {
+        grid-template-columns: 1fr;
+    }
+    
+    .program-links {
+        flex-direction: column;
+    }
+    
+    .program-link {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .afrikalearns-card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .afrikalearns-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .program-badge {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-bottom: 1.5rem;
+        align-self: flex-start;
+    }
+}
