@@ -2567,3 +2567,710 @@ h1, h2, h3, h4 {
         max-width: 1140px;
     }
 }
+
+/* Light Theme Variables */
+:root {
+    /* Light Theme Colors */
+    --primary-color: #2563eb;
+    --secondary-color: #7c3aed;
+    --accent-color: #06b6d4;
+    --ai-color: #10b981;
+    --neon-blue: #00d4ff;
+    --neon-purple: #a855f7;
+    --text-color: #1e293b;
+    --text-light: #64748b;
+    --bg-color: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --ai-gradient: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--ai-color));
+    
+    /* Light theme specific */
+    --nav-bg: rgba(255, 255, 255, 0.95);
+    --card-bg: #ffffff;
+    --input-bg: #f8fafc;
+}
+
+/* Dark Theme Variables */
+body.dark-theme {
+    --primary-color: #3b82f6;
+    --secondary-color: #8b5cf6;
+    --accent-color: #06b6d4;
+    --ai-color: #10b981;
+    --neon-blue: #00d4ff;
+    --neon-purple: #a855f7;
+    --text-color: #ffffff;
+    --text-light: #94a3b8;
+    --bg-color: #0a0a0f;
+    --bg-secondary: #111827;
+    --bg-card: #1e293b;
+    --border-color: #334155;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    --nav-bg: rgba(10, 10, 15, 0.95);
+    --card-bg: #1e293b;
+    --input-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Apply theme variables */
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-size: 16px;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+/* Cards and containers */
+.about-text,
+.media-text,
+.afrikalearns .media-text,
+.project-card,
+.accordion-item,
+.icdl-badges,
+.achievement-card,
+.contact-info,
+.contact-form-container,
+.contact-option {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+}
+
+p, span, li {
+    color: var(--text-color);
+}
+
+.text-light {
+    color: var(--text-light) !important;
+}
+
+/* Form inputs */
+.form-group input,
+.form-group textarea {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+}
+
+/* Buttons - adjust for light theme */
+.btn-secondary {
+    background: transparent;
+    color: var(--neon-blue);
+    border: 2px solid var(--neon-blue);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+/* Social links */
+.social-link {
+    background: rgba(30, 41, 59, 0.1);
+    border-color: rgba(0, 212, 255, 0.2);
+    color: var(--text-light);
+}
+
+.social-link:hover {
+    background: var(--neon-blue);
+    color: white;
+}
+
+/* Profile picture border for light theme */
+body:not(.dark-theme) .profile-picture-border {
+    opacity: 0.2;
+    filter: blur(3px);
+}
+
+/* AI particles for light theme */
+body:not(.dark-theme) .ai-particle {
+    opacity: 0.3;
+}
+
+/* Section backgrounds */
+.quick-stats,
+.media-production,
+.skills,
+.afrikalearns {
+    background-color: var(--bg-secondary);
+    transition: background-color 0.3s ease;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    color: var(--neon-blue);
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: rotate(15deg);
+}
+
+/* Mobile menu for light theme */
+.mobile-menu {
+    background-color: var(--nav-bg);
+}
+
+.mobile-nav-link {
+    color: var(--text-color);
+}
+
+.mobile-nav-link:hover {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--neon-blue);
+}
+
+/* Gallery items */
+.gallery-item,
+.afrikalearns .gallery-item {
+    background: rgba(0, 212, 255, 0.05);
+    border-color: rgba(0, 212, 255, 0.2);
+}
+
+body:not(.dark-theme) .gallery-item,
+body:not(.dark-theme) .afrikalearns .gallery-item {
+    background: rgba(0, 212, 255, 0.02);
+    border-color: rgba(0, 212, 255, 0.1);
+}
+
+/* Skill bars */
+.skill-bar {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+body:not(.dark-theme) .skill-bar {
+    background: rgba(0, 212, 255, 0.05);
+}
+
+/* ICDL badges */
+.badge-item {
+    background: rgba(0, 212, 255, 0.05);
+    border-color: rgba(0, 212, 255, 0.1);
+}
+
+body:not(.dark-theme) .badge-item {
+    background: rgba(0, 212, 255, 0.02);
+}
+
+/* Achievement tags */
+.achievement-tag {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.2);
+}
+
+/* Footer */
+.footer {
+    background: var(--bg-secondary);
+    border-top-color: var(--border-color);
+}
+
+/* WhatsApp float */
+.whatsapp-float {
+    background: #25D366;
+    color: white;
+}
+
+/* AI Assistant */
+.ai-assistant {
+    background: var(--ai-gradient);
+    color: white;
+}
+
+/* Media Production specific border */
+.media-text {
+    border-color: rgba(255, 0, 128, 0.2);
+}
+
+body:not(.dark-theme) .media-text {
+    border-color: rgba(255, 0, 128, 0.1);
+}
+
+/* AfrikaLearns specific border */
+.afrikalearns .media-text {
+    border-color: rgba(34, 197, 94, 0.2);
+}
+
+body:not(.dark-theme) .afrikalearns .media-text {
+    border-color: rgba(34, 197, 94, 0.1);
+}
+
+/* AI Chip */
+.ai-chip {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+    color: var(--neon-blue);
+}
+
+/* Project cards hover effect */
+.project-card:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 15px 30px rgba(0, 212, 255, 0.15);
+}
+
+body:not(.dark-theme) .project-card:hover {
+    box-shadow: 0 15px 30px rgba(0, 212, 255, 0.1);
+}
+
+/* Accordion hover */
+.accordion-header:hover {
+    background: rgba(0, 212, 255, 0.05);
+}
+
+body:not(.dark-theme) .accordion-header:hover {
+    background: rgba(0, 212, 255, 0.02);
+}
+
+/* Form status messages */
+.form-status.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.form-status.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.form-status.info {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+/* Input error state */
+.input-error {
+    border-color: #ef4444 !important;
+}
+
+.input-error-message {
+    color: #ef4444;
+}
+
+/* Loading states */
+.btn-loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Animation adjustments for light theme */
+body:not(.dark-theme) .profile-picture-border {
+    animation-duration: 30s;
+}
+
+body:not(.dark-theme) .ai-glow {
+    opacity: 0.1;
+}
+
+/* Responsive adjustments for theme */
+@media (max-width: 768px) {
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .theme-toggle,
+    .whatsapp-float,
+    .ai-assistant,
+    .back-to-top {
+        display: none !important;
+    }
+}
+
+/* Gallery Item Animations */
+.gallery-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 212, 255, 0.3));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+/* Different entrance animations based on data attribute */
+.gallery-item[data-animation="slide-top-left"] .gallery-overlay {
+    transform: translate(-100%, -100%);
+}
+
+.gallery-item[data-animation="slide-top-right"] .gallery-overlay {
+    transform: translate(100%, -100%);
+}
+
+.gallery-item[data-animation="slide-bottom-left"] .gallery-overlay {
+    transform: translate(-100%, 100%);
+}
+
+.gallery-item[data-animation="slide-bottom-right"] .gallery-overlay {
+    transform: translate(100%, 100%);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.1);
+}
+
+/* Gallery Content Animations */
+.gallery-content {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.gallery-icon {
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+    align-self: flex-end;
+}
+
+.gallery-item:hover .gallery-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.gallery-item:hover .gallery-icon {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Gallery Content Styling */
+.gallery-title {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.gallery-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--neon-blue);
+    border-radius: 2px;
+}
+
+.gallery-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 90%;
+}
+
+/* Gallery Tags */
+.gallery-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.gallery-tag {
+    background: rgba(0, 212, 255, 0.2);
+    color: var(--neon-blue);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.gallery-tag:hover {
+    background: rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Gallery Icon */
+.gallery-icon i {
+    font-size: 2.5rem;
+    color: white;
+    background: var(--ai-gradient);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-icon i {
+    transform: rotate(360deg);
+    box-shadow: 0 6px 30px rgba(0, 212, 255, 0.6);
+}
+
+/* AfrikaLearns Gallery Specific */
+.afrikalearns .gallery-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(34, 197, 94, 0.3));
+}
+
+.afrikalearns .gallery-tag {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.afrikalearns .gallery-tag:hover {
+    background: rgba(34, 197, 94, 0.3);
+}
+
+.afrikalearns .gallery-icon i {
+    background: linear-gradient(135deg, #22c55e, #3b82f6);
+}
+
+.afrikalearns .gallery-title::after {
+    background: #22c55e;
+}
+
+/* Media Production Gallery Specific */
+.media-production .gallery-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(255, 0, 128, 0.3));
+}
+
+.media-production .gallery-tag {
+    background: rgba(255, 0, 128, 0.2);
+    color: #ff0080;
+    border-color: rgba(255, 0, 128, 0.3);
+}
+
+.media-production .gallery-tag:hover {
+    background: rgba(255, 0, 128, 0.3);
+}
+
+.media-production .gallery-icon i {
+    background: linear-gradient(135deg, #ff0080, #00d4ff);
+}
+
+.media-production .gallery-title::after {
+    background: #ff0080;
+}
+
+/* Light Theme Adjustments for Gallery */
+body:not(.dark-theme) .gallery-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(0, 212, 255, 0.2));
+}
+
+body:not(.dark-theme) .afrikalearns .gallery-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(34, 197, 94, 0.2));
+}
+
+body:not(.dark-theme) .media-production .gallery-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(255, 0, 128, 0.2));
+}
+
+/* Gallery Item Container */
+.gallery-item {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: rgba(0, 212, 255, 0.05);
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 300px;
+    cursor: pointer;
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--ai-gradient);
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover::before {
+    opacity: 0.1;
+}
+
+.gallery-item:hover {
+    border-color: var(--neon-blue);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+}
+
+/* Specific border colors on hover */
+.afrikalearns .gallery-item:hover {
+    border-color: #22c55e;
+    box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
+}
+
+.media-production .gallery-item:hover {
+    border-color: #ff0080;
+    box-shadow: 0 20px 40px rgba(255, 0, 128, 0.2);
+}
+
+/* Mobile Responsive for Gallery */
+@media (max-width: 768px) {
+    .gallery-item {
+        height: 250px;
+    }
+    
+    .gallery-overlay {
+        padding: 1.5rem;
+    }
+    
+    .gallery-title {
+        font-size: 1.2rem;
+    }
+    
+    .gallery-description {
+        font-size: 0.85rem;
+        max-width: 100%;
+    }
+    
+    .gallery-icon i {
+        width: 50px;
+        height: 50px;
+        font-size: 1.8rem;
+    }
+    
+    .gallery-tags {
+        gap: 0.3rem;
+    }
+    
+    .gallery-tag {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Tablet Responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .gallery-item {
+        height: 280px;
+    }
+    
+    .gallery-overlay {
+        padding: 1.8rem;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .gallery-item .gallery-overlay {
+        opacity: 1;
+        transform: translate(0, 0);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    }
+    
+    .gallery-content {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .gallery-icon {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    .gallery-item:active .gallery-img {
+        transform: scale(1.05);
+    }
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .gallery-overlay,
+    .gallery-content,
+    .gallery-icon,
+    .gallery-img,
+    .gallery-item {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+}

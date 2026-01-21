@@ -18,15 +18,9 @@ let lastScrollTop = 0;
 let ticking = false;
 let menuOpen = false;
 
-// AI Typing Animation Variables
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-let typingInterval;
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize theme
+    // Initialize theme - FIRST!
     initTheme();
     
     // Initialize mobile-specific optimizations
@@ -57,9 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize lazy loading for images
     initLazyLoading();
     
-    // Initialize performance monitoring
-    initPerformanceMonitor();
-    
     // Add WhatsApp button
     addWhatsAppButton();
     
@@ -81,43 +72,67 @@ document.addEventListener('DOMContentLoaded', () => {
     initAnimationObserver();
 });
 
-// Theme Toggle Functionality
+// Theme Toggle Functionality - UPDATED
 function toggleTheme() {
-    document.body.classList.toggle('dark-theme');
-    
-    // Update icon based on current theme
     const isDark = document.body.classList.contains('dark-theme');
-    const themeIcons = document.querySelectorAll('.theme-toggle i');
     
-    themeIcons.forEach(icon => {
-        icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-    });
-    
-    // Save theme preference to localStorage
-    localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
+    if (isDark) {
+        // Switch to light mode
+        document.body.classList.remove('dark-theme');
+        updateThemeIcon(false);
+        localStorage.setItem('portfolio-theme', 'light');
+    } else {
+        // Switch to dark mode
+        document.body.classList.add('dark-theme');
+        updateThemeIcon(true);
+        localStorage.setItem('portfolio-theme', 'dark');
+    }
     
     // Send analytics event
     if (typeof gtag !== 'undefined') {
         gtag('event', 'theme_toggle', {
             'event_category': 'Settings',
-            'event_label': isDark ? 'dark' : 'light',
+            'event_label': isDark ? 'light' : 'dark',
             'value': 1
         });
     }
 }
 
-// Initialize theme based on localStorage or system preference
+// Update theme icon
+function updateThemeIcon(isDark) {
+    const themeIcons = document.querySelectorAll('.theme-toggle i');
+    
+    themeIcons.forEach(icon => {
+        if (isDark) {
+            // Dark mode: show sun icon
+            icon.className = 'fas fa-sun';
+            icon.style.color = '#fbbf24';
+        } else {
+            // Light mode: show moon icon
+            icon.className = 'fas fa-moon';
+            icon.style.color = '#4f46e5';
+        }
+    });
+}
+
+// Initialize theme based on localStorage or system preference - UPDATED
 function initTheme() {
     const savedTheme = localStorage.getItem('portfolio-theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
+    // Always apply theme immediately
     if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
         document.body.classList.add('dark-theme');
-        const themeIcons = document.querySelectorAll('.theme-toggle i');
-        themeIcons.forEach(icon => {
-            icon.className = 'fas fa-sun';
-        });
+        updateThemeIcon(true);
+    } else {
+        document.body.classList.remove('dark-theme');
+        updateThemeIcon(false);
     }
+    
+    // Add transition after initial load
+    setTimeout(() => {
+        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+    }, 100);
 }
 
 // Mobile Menu Toggle
@@ -165,7 +180,7 @@ function closeMobileMenu() {
 
 // Initialize event listeners with mobile optimizations
 function initEventListeners() {
-    // Theme toggles
+    // Theme toggles - UPDATED
     themeToggle?.addEventListener('click', toggleTheme);
     mobileThemeToggle?.addEventListener('click', toggleTheme);
     
@@ -211,6 +226,21 @@ function initEventListeners() {
         }
     });
     
+    // Listen for system theme changes
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    darkModeMediaQuery.addEventListener('change', (e) => {
+        if (!localStorage.getItem('portfolio-theme')) {
+            // Only update if user hasn't set a preference
+            if (e.matches) {
+                document.body.classList.add('dark-theme');
+                updateThemeIcon(true);
+            } else {
+                document.body.classList.remove('dark-theme');
+                updateThemeIcon(false);
+            }
+        }
+    });
+    
     // Add touch gestures for mobile
     if (isTouchDevice()) {
         initTouchGestures();
@@ -229,6 +259,292 @@ function initEventListeners() {
             }
         }, 250);
     });
+}
+
+// Add to existing main.js file, after the initEventListeners function
+
+// Initialize Gallery Animations
+function initGalleryAnimations() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    galleryItems.forEach(item => {
+        // Add hover effects
+        item.addEventListener('mouseenter', () => {
+            // Add particle effect
+            addGalleryParticles(item);
+            
+            // Add ripple effect
+            createRippleEffect(item);
+        });
+        
+        // Touch interactions for mobile
+        item.addEventListener('touchstart', () => {
+            item.classList.add('touch-active');
+        }, { passive: true });
+        
+        item.addEventListener('touchend', () => {
+            item.classList.remove('touch-active');
+            
+            // Trigger animation on tap
+            setTimeout(() => {
+                addGalleryParticles(item);
+                createRippleEffect(item);
+            }, 100);
+        }, { passive: true });
+    });
+    
+    // Initialize intersection observer for gallery items
+    const galleryObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                
+                // Add staggered animation for gallery items
+                const items = entry.target.querySelectorAll('.gallery-item');
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                });
+                
+                galleryObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    
+    // Observe gallery sections
+    const gallerySections = document.querySelectorAll('.media-production, .afrikalearns');
+    gallerySections.forEach(section => {
+        galleryObserver.observe(section);
+    });
+}
+
+// Add particle effect to gallery items
+function addGalleryParticles(galleryItem) {
+    // Create particles container if not exists
+    let particlesContainer = galleryItem.querySelector('.gallery-particles');
+    
+    if (!particlesContainer) {
+        particlesContainer = document.createElement('div');
+        particlesContainer.className = 'gallery-particles';
+        particlesContainer.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        `;
+        galleryItem.appendChild(particlesContainer);
+    }
+    
+    // Clear existing particles
+    particlesContainer.innerHTML = '';
+    
+    // Create new particles
+    const particleCount = 15;
+    const colors = galleryItem.closest('.afrikalearns') 
+        ? ['#22c55e', '#3b82f6', '#10b981']
+        : galleryItem.closest('.media-production')
+        ? ['#ff0080', '#00d4ff', '#a855f7']
+        : ['#00d4ff', '#a855f7', '#10b981'];
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'gallery-particle';
+        
+        // Random properties
+        const size = Math.random() * 6 + 2;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const duration = Math.random() * 1 + 0.5;
+        
+        particle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: ${color};
+            border-radius: 50%;
+            left: ${x}%;
+            top: ${y}%;
+            opacity: 0;
+            transform: scale(0);
+            animation: particlePop ${duration}s ease-out;
+            box-shadow: 0 0 10px ${color};
+        `;
+        
+        particlesContainer.appendChild(particle);
+        
+        // Remove particle after animation
+        setTimeout(() => {
+            particle.remove();
+        }, duration * 1000);
+    }
+}
+
+// Create ripple effect on gallery item
+function createRippleEffect(galleryItem) {
+    const ripple = document.createElement('div');
+    ripple.className = 'gallery-ripple';
+    
+    const rect = galleryItem.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    
+    ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        animation: rippleEffect 0.6s ease-out;
+        pointer-events: none;
+        z-index: 1;
+    `;
+    
+    galleryItem.appendChild(ripple);
+    
+    // Remove ripple after animation
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Add CSS for gallery animations
+const galleryAnimationsCSS = document.createElement('style');
+galleryAnimationsCSS.textContent = `
+    @keyframes particlePop {
+        0% {
+            opacity: 0;
+            transform: scale(0);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0) translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+        }
+    }
+    
+    @keyframes rippleEffect {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+        }
+    }
+    
+    /* Gallery visibility animations */
+    .gallery-item {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .gallery-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Touch feedback */
+    .gallery-item.touch-active {
+        transform: scale(0.98);
+    }
+    
+    /* Gallery loading animation */
+    .gallery-item::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transform: translateX(-100%);
+        animation: loading 1.5s infinite;
+    }
+    
+    .gallery-item.loaded::after {
+        animation: none;
+        display: none;
+    }
+    
+    @keyframes loading {
+        100% {
+            transform: translateX(100%);
+        }
+    }
+    
+    /* Performance optimizations */
+    @media (prefers-reduced-motion: reduce) {
+        .gallery-item {
+            transition: none !important;
+            animation: none !important;
+        }
+        
+        .gallery-particle,
+        .gallery-ripple {
+            display: none !important;
+        }
+    }
+`;
+
+document.head.appendChild(galleryAnimationsCSS);
+
+// Update the DOMContentLoaded event listener to include gallery animations
+// Add this to your existing DOMContentLoaded event listener:
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing initialization code ...
+    
+    // Initialize gallery animations
+    initGalleryAnimations();
+    
+    // ... rest of existing code ...
+});
+
+// Add image lazy loading for gallery
+function initGalleryLazyLoading() {
+    const galleryImages = document.querySelectorAll('.gallery-img[data-src]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    
+                    // Add loaded class for animation
+                    img.onload = () => {
+                        img.closest('.gallery-item').classList.add('loaded');
+                    };
+                    
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        galleryImages.forEach(img => imageObserver.observe(img));
+    }
+}
+
+// Update initLazyLoading to include gallery images
+// In your existing initLazyLoading function, add:
+function initLazyLoading() {
+    // ... existing lazy loading code ...
+    
+    // Also initialize gallery lazy loading
+    initGalleryLazyLoading();
 }
 
 // Smooth scrolling for anchor links
@@ -299,7 +615,6 @@ function startTypingAnimation() {
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    let isEnd = false;
 
     function type() {
         const currentText = texts[textIndex];
@@ -313,15 +628,11 @@ function startTypingAnimation() {
         }
 
         if (!isDeleting && charIndex === currentText.length) {
-            isEnd = true;
             isDeleting = true;
             setTimeout(type, 2000);
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
-            textIndex++;
-            if (textIndex === texts.length) {
-                textIndex = 0;
-            }
+            textIndex = (textIndex + 1) % texts.length;
             setTimeout(type, 500);
         } else {
             const speed = isDeleting ? 50 : 100;
@@ -396,8 +707,8 @@ function initCounters() {
 // Animate counter
 function animateCounter(element, target) {
     let current = 0;
-    const increment = target / 50; // 50 frames
-    const duration = 1500; // 1.5 seconds
+    const increment = target / 50;
+    const duration = 1500;
     const interval = duration / 50;
     
     const timer = setInterval(() => {
@@ -517,16 +828,6 @@ function initContactForm() {
     contactForm.setAttribute('action', 'https://formsubmit.co/safaribright93@gmail.com');
     contactForm.setAttribute('method', 'POST');
     
-    // Add AI form indicator
-    const aiIndicator = document.createElement('div');
-    aiIndicator.className = 'ai-form-indicator';
-    aiIndicator.innerHTML = `
-        <div class="ai-processing"></div>
-        <span>AI-enhanced contact form</span>
-    `;
-    
-    contactForm.appendChild(aiIndicator);
-    
     // Add submit listener
     contactForm.addEventListener('submit', handleFormSubmit);
     
@@ -535,15 +836,6 @@ function initContactForm() {
     inputs.forEach(input => {
         input.addEventListener('blur', validateInput);
         input.addEventListener('input', clearInputError);
-        
-        // Add AI-style focus effect
-        input.addEventListener('focus', () => {
-            input.parentElement.classList.add('ai-focus');
-        });
-        
-        input.addEventListener('blur', () => {
-            input.parentElement.classList.remove('ai-focus');
-        });
     });
 }
 
@@ -580,12 +872,6 @@ function showInputError(input, message) {
     const error = document.createElement('div');
     error.className = 'input-error-message';
     error.textContent = message;
-    error.style.cssText = `
-        color: #ef4444;
-        font-size: 0.85rem;
-        margin-top: 5px;
-        animation: fadeIn 0.3s ease;
-    `;
     
     input.parentNode.appendChild(error);
 }
@@ -652,23 +938,10 @@ function setButtonLoading(loading) {
             </div>
             <span>AI Processing...</span>
         `;
-        
-        // Add AI processing animation
-        submitBtn.style.position = 'relative';
-        const aiEffect = document.createElement('div');
-        aiEffect.className = 'ai-submit-effect';
-        submitBtn.appendChild(aiEffect);
-        
     } else {
         submitBtn.classList.remove('btn-loading');
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-        
-        // Remove AI effect
-        const aiEffect = submitBtn.querySelector('.ai-submit-effect');
-        if (aiEffect) {
-            aiEffect.remove();
-        }
     }
 }
 
@@ -695,8 +968,8 @@ function showFormStatus(type, message) {
     };
     
     status.innerHTML = `
-        <div class="status-icon" style="background: ${colors[type]}20; border: 1px solid ${colors[type]}40;">
-            <i class="fas fa-${icons[type] || 'info-circle'}" style="color: ${colors[type]}"></i>
+        <div class="status-icon">
+            <i class="fas fa-${icons[type] || 'info-circle'}"></i>
         </div>
         <div class="status-content">
             <span>${message}</span>
@@ -710,17 +983,11 @@ function showFormStatus(type, message) {
     
     contactForm?.parentNode.insertBefore(status, contactForm.nextSibling);
     
-    // Add AI fade-in animation
-    status.style.animation = 'fadeInUp 0.5s ease-out';
-    
     // Auto-remove after 8 seconds on mobile, 10 seconds on desktop
     const autoRemoveTime = isMobile() ? 8000 : 10000;
     setTimeout(() => {
         if (status.parentNode) {
-            status.style.animation = 'fadeOut 0.3s ease-out forwards';
-            setTimeout(() => {
-                if (status.parentNode) status.parentNode.removeChild(status);
-            }, 300);
+            status.remove();
         }
     }, autoRemoveTime);
 }
@@ -824,24 +1091,6 @@ function initMobileOptimizations() {
         element.style.minHeight = '44px';
         element.style.minWidth = '44px';
     });
-    
-    // Prevent zoom on input focus
-    document.querySelectorAll('input, textarea, select').forEach(input => {
-        input.addEventListener('focus', () => {
-            if (isMobile()) {
-                setTimeout(() => {
-                    window.scrollTo(0, 0);
-                    document.body.style.height = '100%';
-                }, 100);
-            }
-        });
-    });
-    
-    // Optimize AI animations for mobile
-    const aiElements = document.querySelectorAll('.ai-particle, .ai-glow, .ai-sparkle');
-    aiElements.forEach(element => {
-        element.style.animationDuration = '3s'; // Faster animations on mobile
-    });
 }
 
 // Touch interactions for mobile
@@ -854,26 +1103,6 @@ function initTouchInteractions() {
         
         element.addEventListener('touchend', function() {
             this.classList.remove('touch-active');
-        }, { passive: true });
-    });
-    
-    // Improve scrolling performance
-    document.addEventListener('touchmove', (e) => {
-        // Prevent default on elements that shouldn't scroll
-        if (e.target.closest('.no-scroll')) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-    
-    // Add touch effects to gallery items
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    galleryItems.forEach(item => {
-        item.addEventListener('touchstart', () => {
-            item.style.transform = 'scale(0.98)';
-        }, { passive: true });
-        
-        item.addEventListener('touchend', () => {
-            item.style.transform = 'scale(1)';
         }, { passive: true });
     });
 }
@@ -937,7 +1166,7 @@ function initLazyLoading() {
                     img.src = img.dataset.src;
                     img.removeAttribute('data-src');
                     
-                    // Add AI fade-in effect
+                    // Add fade-in effect
                     img.style.opacity = '0';
                     img.style.transition = 'opacity 0.5s ease';
                     setTimeout(() => {
@@ -960,37 +1189,6 @@ function initLazyLoading() {
     }
 }
 
-// Performance monitoring
-function initPerformanceMonitor() {
-    // Only run on development or if enabled
-    if (window.location.hostname !== 'localhost' && !localStorage.getItem('debug')) {
-        return;
-    }
-    
-    // Monitor long tasks
-    if ('PerformanceObserver' in window) {
-        const observer = new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-                if (entry.duration > 50) {
-                    console.warn('Long task detected:', entry);
-                }
-            }
-        });
-        
-        observer.observe({ entryTypes: ['longtask'] });
-    }
-    
-    // Monitor memory usage
-    if ('memory' in performance) {
-        setInterval(() => {
-            const memory = performance.memory;
-            if (memory.usedJSHeapSize > 100000000) { // 100MB
-                console.warn('High memory usage:', memory);
-            }
-        }, 30000);
-    }
-}
-
 // Add WhatsApp floating button
 function addWhatsAppButton() {
     // Only add on mobile or if user prefers reduced motion
@@ -1007,17 +1205,6 @@ function addWhatsAppButton() {
         // Add AI animation
         whatsappBtn.style.animation = 'pulse 2s ease-in-out infinite';
         
-        // Add click tracking
-        whatsappBtn.addEventListener('click', () => {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'whatsapp_click', {
-                    'event_category': 'Contact',
-                    'event_label': 'Mobile',
-                    'value': 1
-                });
-            }
-        });
-        
         document.body.appendChild(whatsappBtn);
     }
 }
@@ -1033,25 +1220,10 @@ function initCopyEmail() {
             element.setAttribute('tabindex', '0');
             element.setAttribute('aria-label', 'Copy email address');
             
-            // Add AI style
-            element.style.position = 'relative';
-            element.style.transition = 'color 0.3s ease';
-            
             element.addEventListener('click', copyEmail);
             element.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     copyEmail(e);
-                }
-            });
-            
-            // Add hover effect
-            element.addEventListener('mouseenter', () => {
-                element.style.color = 'var(--neon-blue)';
-            });
-            
-            element.addEventListener('mouseleave', () => {
-                if (!element.classList.contains('copied')) {
-                    element.style.color = '';
                 }
             });
         }
@@ -1063,37 +1235,15 @@ function copyEmail(e) {
     const element = e.target;
     const email = element.textContent.trim();
     
-    // Add AI copying animation
-    element.classList.add('ai-copying');
-    
     navigator.clipboard.writeText(email).then(() => {
-        element.classList.remove('ai-copying');
-        element.classList.add('copied');
-        
         const original = element.textContent;
         element.textContent = '📋 Copied to clipboard!';
         element.style.color = '#10b981';
         
-        // Add AI success effect
-        const aiEffect = document.createElement('div');
-        aiEffect.className = 'ai-copy-effect';
-        element.appendChild(aiEffect);
-        
         setTimeout(() => {
-            aiEffect.remove();
             element.textContent = original;
             element.style.color = '';
-            element.classList.remove('copied');
         }, 2000);
-        
-        // Send analytics event
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'email_copy', {
-                'event_category': 'Contact',
-                'event_label': 'Email',
-                'value': 1
-            });
-        }
     }).catch(err => {
         console.error('Failed to copy email:', err);
         element.textContent = '❌ Failed to copy';
@@ -1213,15 +1363,6 @@ function showAIAssistant() {
             }, 300);
         });
     });
-    
-    // Send analytics event
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'ai_assistant', {
-            'event_category': 'Interaction',
-            'event_label': 'Open',
-            'value': 1
-        });
-    }
 }
 
 // Handle AI assistant actions
@@ -1254,18 +1395,6 @@ function handleAIAction(action) {
     const actionMsg = document.createElement('div');
     actionMsg.className = 'ai-action-message';
     actionMsg.textContent = message;
-    actionMsg.style.cssText = `
-        position: fixed;
-        top: 100px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--ai-gradient);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 20px;
-        z-index: 10000;
-        animation: fadeInUp 0.3s ease, fadeOut 0.3s ease 2s forwards;
-    `;
     
     document.body.appendChild(actionMsg);
     
@@ -1288,198 +1417,82 @@ function handleAIAction(action) {
     }, 500);
 }
 
-// Add CSS for AI enhancements
-const aiStyles = document.createElement('style');
-aiStyles.textContent = `
-    /* AI-specific animations */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    @keyframes fadeOut {
-        to {
-            opacity: 0;
-        }
-    }
-    
-    /* AI Modal */
-    .ai-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
-        z-index: 10000;
+// Add CSS for theme toggle and AI enhancements
+const themeStyles = document.createElement('style');
+themeStyles.textContent = `
+    /* Theme-specific styles */
+    .form-status {
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 10px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        gap: 1rem;
+        animation: fadeIn 0.3s ease;
     }
     
-    .ai-modal.show {
-        opacity: 1;
+    .form-status.success {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        color: #10b981;
     }
     
-    .ai-modal-content {
-        background: rgba(30, 41, 59, 0.95);
-        border-radius: 20px;
-        border: 1px solid rgba(0, 212, 255, 0.3);
-        width: 90%;
-        max-width: 500px;
-        max-height: 80vh;
-        overflow: hidden;
-        transform: translateY(20px);
-        transition: transform 0.3s ease;
-    }
-    
-    .ai-modal.show .ai-modal-content {
-        transform: translateY(0);
-    }
-    
-    .ai-modal-header {
-        padding: 1.5rem;
-        border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .ai-modal-header h3 {
-        color: var(--neon-blue);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .ai-modal-close {
-        background: none;
-        border: none;
-        color: #94a3b8;
-        font-size: 1.5rem;
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-    }
-    
-    .ai-modal-close:hover {
+    .form-status.error {
         background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.2);
         color: #ef4444;
     }
     
-    .ai-modal-body {
-        padding: 1.5rem;
+    .form-status.info {
+        background: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        color: #3b82f6;
     }
     
-    .ai-message {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-    
-    .ai-avatar {
+    .status-icon {
         width: 40px;
         height: 40px;
-        background: var(--ai-gradient);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
+        font-size: 1.2rem;
     }
     
-    .ai-text {
-        background: rgba(0, 212, 255, 0.1);
-        border: 1px solid rgba(0, 212, 255, 0.2);
-        border-radius: 15px;
-        padding: 1rem;
-        position: relative;
+    .form-status.success .status-icon {
+        background: rgba(16, 185, 129, 0.2);
     }
     
-    .ai-text::before {
-        content: '';
-        position: absolute;
-        left: -8px;
-        top: 15px;
-        width: 0;
-        height: 0;
-        border-top: 8px solid transparent;
-        border-bottom: 8px solid transparent;
-        border-right: 8px solid rgba(0, 212, 255, 0.2);
+    .form-status.error .status-icon {
+        background: rgba(239, 68, 68, 0.2);
     }
     
-    .ai-text p {
-        margin: 0;
-        color: white;
+    .form-status.info .status-icon {
+        background: rgba(59, 130, 246, 0.2);
     }
     
-    .ai-options {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+    .status-content {
+        flex: 1;
     }
     
-    .ai-option {
-        background: rgba(0, 212, 255, 0.05);
-        border: 1px solid rgba(0, 212, 255, 0.2);
-        border-radius: 10px;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        color: #cbd5e1;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .ai-option:hover {
-        background: rgba(0, 212, 255, 0.1);
-        border-color: var(--neon-blue);
-        transform: translateY(-2px);
-        color: white;
-    }
-    
-    .ai-option i {
+    .status-close {
+        background: none;
+        border: none;
+        color: inherit;
         font-size: 1.5rem;
-        color: var(--neon-blue);
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
     }
     
-    .ai-modal-footer {
-        padding: 1rem 1.5rem;
-        border-top: 1px solid rgba(0, 212, 255, 0.1);
-        text-align: center;
-        color: #94a3b8;
-        font-size: 0.875rem;
-    }
-    
-    .ai-modal-footer i {
-        margin-right: 5px;
-    }
-    
-    /* AI Copy Effect */
-    .ai-copy-effect {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, transparent, rgba(16, 185, 129, 0.2), transparent);
-        animation: shine 1s ease;
+    .status-close:hover {
+        opacity: 1;
     }
     
     /* AI Spinner */
@@ -1496,154 +1509,111 @@ aiStyles.textContent = `
         to { transform: rotate(360deg); }
     }
     
-    /* Mobile-specific AI styles */
-    @media (max-width: 768px) {
-        .ai-modal-content {
-            width: 95%;
-            margin: 1rem;
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Touch feedback */
+    .touch-active {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+    
+    /* Reduce motion */
+    .reduced-motion * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    /* Input error styles */
+    .input-error {
+        border-color: #ef4444 !important;
+    }
+    
+    .input-error-message {
+        color: #ef4444;
+        font-size: 0.85rem;
+        margin-top: 5px;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    /* WhatsApp button */
+    .whatsapp-badge {
+        position: fixed;
+        bottom: 90px;
+        left: 20px;
+        width: 56px;
+        height: 56px;
+        background: #25D366;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        z-index: 999;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+    
+    .whatsapp-badge:hover {
+        transform: scale(1.1);
+    }
+    
+    /* AI Action Message */
+    .ai-action-message {
+        position: fixed;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #00d4ff, #a855f7, #10b981);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        z-index: 10000;
+        animation: fadeInUp 0.3s ease, fadeOut 0.3s ease 2s forwards;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translate(-50%, 20px);
         }
-        
-        .ai-options {
-            grid-template-columns: 1fr;
-        }
-        
-        .ai-modal-header {
-            padding: 1rem;
-        }
-        
-        .ai-modal-body {
-            padding: 1rem;
-        }
-        
-        .ai-message {
-            margin-bottom: 1.5rem;
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
         }
     }
     
-    /* Mobile-specific enhancements */
+    @keyframes fadeOut {
+        to {
+            opacity: 0;
+        }
+    }
+    
+    /* Mobile adjustments */
     @media (max-width: 768px) {
-        /* Improve touch targets */
-        button, .btn, .nav-link, .project-link {
-            min-height: 44px;
-            min-width: 44px;
-            touch-action: manipulation;
-        }
-        
-        /* Prevent text size adjustment */
-        input, textarea, select {
-            font-size: 16px !important;
-        }
-        
-        /* Improve form inputs */
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            font-size: 16px;
-            padding: 14px 16px;
-        }
-        
-        /* Status message improvements */
-        .form-status {
-            padding: 1rem;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-        }
-        
-        .status-close {
-            background: none;
-            border: none;
-            color: inherit;
-            font-size: 1.5rem;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Touch feedback */
-        .touch-active {
-            opacity: 0.7;
-            transform: scale(0.98);
-        }
-        
-        /* Reduce motion for low-power devices */
-        .reduced-motion * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-        
-        /* Input error styles */
-        .input-error {
-            border-color: #ef4444 !important;
-        }
-        
-        .input-error-message {
-            color: #ef4444;
-            font-size: 0.85rem;
-            margin-top: 5px;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* WhatsApp button mobile styles */
         .whatsapp-badge {
-            width: 56px;
-            height: 56px;
-            font-size: 1.8rem;
-            bottom: 20px;
-            right: 20px;
-        }
-    }
-    
-    @media (max-width: 400px) {
-        /* Extra small screens */
-        .container {
-            padding: 0 12px;
+            bottom: 100px;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
         }
         
-        .hero-title {
-            font-size: 2rem !important;
+        .ai-action-message {
+            top: 80px;
+            font-size: 0.9rem;
+            padding: 8px 16px;
         }
-        
-        .hero-tagline {
-            font-size: 1.1rem !important;
-        }
-        
-        .section-title {
-            font-size: 1.8rem !important;
-        }
-        
-        .ai-modal-content {
-            margin: 0.5rem;
-        }
-    }
-    
-    /* Prevent pull-to-refresh on mobile */
-    body {
-        overscroll-behavior-y: contain;
-    }
-    
-    /* Improve scrolling performance */
-    * {
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
     }
 `;
 
-document.head.appendChild(aiStyles);
+document.head.appendChild(themeStyles);
 
-// Export functions for global access (if needed)
+// Export functions for global access
 window.copyEmail = copyEmail;
 window.toggleTheme = toggleTheme;
 window.toggleMobileMenu = toggleMobileMenu;
