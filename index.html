@@ -29,6 +29,15 @@
     <!-- End Google Analytics -->
 </head>
 <body>
+    <!-- AI Animated Background Elements -->
+    <div class="ai-background">
+        <div class="ai-particle" style="top: 10%; left: 5%;"></div>
+        <div class="ai-particle" style="top: 20%; right: 10%;"></div>
+        <div class="ai-particle" style="bottom: 30%; left: 15%;"></div>
+        <div class="ai-particle" style="bottom: 20%; right: 20%;"></div>
+        <div class="ai-particle" style="top: 50%; left: 50%;"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -78,14 +87,17 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h3 class="hero-subtitle">Hello, I'm</h3>
-                    <h1 class="hero-title">Bright Safari</h1>
-                    <h2 class="hero-tagline">Computer Science & AI Innovator</h2>
-                    <div class="hero-ai-tagline">
+                    <h3 class="hero-subtitle animate-fade-in-up">Hello, I'm</h3>
+                    <h1 class="hero-title animate-fade-in-up" style="animation-delay: 0.2s">Bright Safari</h1>
+                    <h2 class="hero-tagline animate-fade-in-up" style="animation-delay: 0.4s">Computer Science & AI Innovator</h2>
+                    <div class="hero-ai-tagline animate-fade-in-up" style="animation-delay: 0.6s">
                         <span class="ai-text">Building Tomorrow with</span>
-                        <span class="ai-highlight">AI-Powered Solutions</span>
+                        <span class="ai-highlight">
+                            <span class="ai-text-typing" id="aiTextTyping"></span>
+                            <span class="ai-cursor">|</span>
+                        </span>
                     </div>
-                    <div class="hero-actions">
+                    <div class="hero-actions animate-fade-in-up" style="animation-delay: 0.8s">
                         <a href="#projects" class="btn btn-primary">
                             <i class="fas fa-code"></i> View Projects
                         </a>
@@ -93,7 +105,7 @@
                             <i class="fas fa-envelope"></i> Contact Me
                         </a>
                     </div>
-                    <div class="hero-social">
+                    <div class="hero-social animate-fade-in-up" style="animation-delay: 1s">
                         <a href="https://github.com/yourusername" class="social-link"><i class="fab fa-github"></i></a>
                         <a href="https://linkedin.com/in/yourusername" class="social-link"><i class="fab fa-linkedin"></i></a>
                         <a href="https://twitter.com/yourusername" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -101,9 +113,10 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="profile-picture-container">
+                    <div class="profile-picture-container animate-float">
                         <img src="assets/images/profile.jpg" alt="Bright Safari" class="profile-picture">
                         <div class="profile-picture-border"></div>
+                        <div class="ai-glow"></div>
                     </div>
                 </div>
             </div>
@@ -114,28 +127,28 @@
     <section class="quick-stats">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-item">
+                <div class="stat-item animate-counter" data-target="10">
                     <i class="fas fa-certificate"></i>
                     <div>
-                        <h3>10+</h3>
+                        <h3>0+</h3>
                         <p>Certifications</p>
                     </div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item animate-counter" data-target="2">
                     <i class="fas fa-project-diagram"></i>
                     <div>
-                        <h3>2+</h3>
+                        <h3>0+</h3>
                         <p>Live Projects</p>
                     </div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item animate-fade-in-up">
                     <i class="fas fa-graduation-cap"></i>
                     <div>
                         <h3>UCT</h3>
                         <p>CS & AI Student</p>
                     </div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item animate-fade-in-up">
                     <i class="fas fa-video"></i>
                     <div>
                         <h3>Live</h3>
@@ -153,8 +166,11 @@
                 <i class="fas fa-user-astronaut"></i> About Me
             </h2>
             <div class="about-content">
-                <div class="about-text">
+                <div class="about-text animate-slide-in-left">
                     <div class="ai-highlight-box">
+                        <div class="ai-chip">
+                            <i class="fas fa-microchip"></i> AI-Powered Learning
+                        </div>
                         <h3>Bachelor of Science in Computer Science & AI</h3>
                         <p>University of Cape Town</p>
                     </div>
@@ -179,21 +195,22 @@
                     <div class="tech-passions">
                         <h4><i class="fas fa-bolt"></i> Tech Passions</h4>
                         <div class="passion-tags">
-                            <span class="passion-tag">AI & Machine Learning</span>
-                            <span class="passion-tag">Full-Stack Development</span>
-                            <span class="passion-tag">Cybersecurity</span>
-                            <span class="passion-tag">Live Production</span>
+                            <span class="passion-tag animate-pulse">AI & Machine Learning</span>
+                            <span class="passion-tag animate-pulse" style="animation-delay: 0.2s">Full-Stack Development</span>
+                            <span class="passion-tag animate-pulse" style="animation-delay: 0.4s">Cybersecurity</span>
+                            <span class="passion-tag animate-pulse" style="animation-delay: 0.6s">Live Production</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="boeing-card">
+                <div class="boeing-card animate-slide-in-right">
                     <div class="boeing-image">
                         <img src="assets/images/Boeing Innovation camp.jpg" alt="Boeing Innovation Camp" class="boeing-img">
                         <div class="boeing-overlay">
                             <h4>Boeing Innovation Camp</h4>
                             <p>Aerospace Innovation Session Participant</p>
                         </div>
+                        <div class="ai-sparkle"></div>
                     </div>
                 </div>
             </div>
@@ -207,7 +224,10 @@
                 <i class="fas fa-video"></i> Media & Production
             </h2>
             <div class="media-content">
-                <div class="media-text">
+                <div class="media-text animate-slide-in-left">
+                    <div class="ai-chip" style="background: rgba(255, 0, 128, 0.1); border-color: rgba(255, 0, 128, 0.3); color: #ff0080;">
+                        <i class="fas fa-broadcast-tower"></i> Live Production
+                    </div>
                     <h3><i class="fas fa-broadcast-tower"></i> Church Live Streaming & Video Production</h3>
                     <p class="media-description">
                         Beyond software development, I manage live video production for TAG ICC Dodoma Church. 
@@ -216,7 +236,7 @@
                     </p>
                     
                     <div class="media-highlights">
-                        <div class="media-item">
+                        <div class="media-item animate-fade-in-up">
                             <i class="fas fa-satellite-dish"></i>
                             <div>
                                 <h4>Live Streaming Control</h4>
@@ -224,7 +244,7 @@
                             </div>
                         </div>
                         
-                        <div class="media-item">
+                        <div class="media-item animate-fade-in-up" style="animation-delay: 0.2s">
                             <i class="fas fa-cogs"></i>
                             <div>
                                 <h4>Production Equipment</h4>
@@ -235,7 +255,7 @@
                 </div>
                 
                 <div class="media-gallery">
-                    <div class="gallery-item">
+                    <div class="gallery-item animate-zoom-in">
                         <img src="assets/images/Livestreamer.jpg" alt="Live Streaming Control" class="gallery-img">
                         <div class="gallery-caption">
                             <h4>Live Streaming Control</h4>
@@ -243,7 +263,7 @@
                         </div>
                     </div>
                     
-                    <div class="gallery-item">
+                    <div class="gallery-item animate-zoom-in" style="animation-delay: 0.2s">
                         <img src="assets/images/Videoshooting1.jpg" alt="Production Equipment" class="gallery-img">
                         <div class="gallery-caption">
                             <h4>Production Equipment</h4>
@@ -255,88 +275,97 @@
         </div>
     </section>
 
-        <!-- AfrikaLearns Section -->
-<section class="afrikalearns" id="afrikalearns">
-    <div class="container">
-        <h2 class="section-title">
-            <i class="fas fa-video"></i> AfrikaLearns
-        </h2>
-        <div class="media-content">
-            <div class="media-text">
-                <h3><i class="fas fa-broadcast-tower"></i> AfrikaLearns For-Students Program</h3>
-                <p class="media-description">
-                    I participated in the For-Students Program by AfrikaLearns, an initiative dedicated 
-                    to empowering learners through global collaboration. As part of this community, 
-                    I engaged as a tutor in workshops that enhanced my skills in presentation, teamwork, 
-                    and peer-to-peer learning.
-                </p>
-                
-                <div class="media-highlights">
-                    <div class="media-item">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <div>
-                            <h4>Presentation Skills</h4>
-                            <p>Enhanced public speaking and digital presentation capabilities</p>
+    <!-- AfrikaLearns Section -->
+    <section class="afrikalearns" id="afrikalearns">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-globe-africa"></i> AfrikaLearns
+            </h2>
+            <div class="media-content">
+                <div class="media-text animate-slide-in-left">
+                    <div class="ai-chip" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); color: #22c55e;">
+                        <i class="fas fa-robot"></i> AI-Enhanced Learning
+                    </div>
+                    <h3><i class="fas fa-users"></i> AfrikaLearns For-Students Program</h3>
+                    <p class="media-description">
+                        I participated in the For-Students Program by AfrikaLearns, an initiative dedicated 
+                        to empowering learners through global collaboration. As part of this community, 
+                        I engaged as a tutor in workshops that enhanced my skills in presentation, teamwork, 
+                        and peer-to-peer learning.
+                    </p>
+                    
+                    <div class="media-highlights">
+                        <div class="media-item animate-fade-in-up">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <div>
+                                <h4>Presentation Skills</h4>
+                                <p>Enhanced public speaking and digital presentation capabilities</p>
+                            </div>
+                        </div>
+                        
+                        <div class="media-item animate-fade-in-up" style="animation-delay: 0.2s">
+                            <i class="fas fa-handshake"></i>
+                            <div>
+                                <h4>Peer Collaboration</h4>
+                                <p>Developed effective teamwork and knowledge sharing techniques</p>
+                            </div>
+                        </div>
+                        
+                        <div class="media-item animate-fade-in-up" style="animation-delay: 0.4s">
+                            <i class="fas fa-network-wired"></i>
+                            <div>
+                                <h4>Global Network</h4>
+                                <p>Connected with diverse international student community</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="media-item">
-                        <i class="fas fa-handshake"></i>
-                        <div>
-                            <h4>Peer Collaboration</h4>
-                            <p>Developed effective teamwork and knowledge sharing techniques</p>
+                    <div class="program-links">
+                        <a href="https://sites.google.com/view/bright-safari/home" target="_blank" class="program-link animate-fade-in-up" style="animation-delay: 0.6s">
+                            <i class="fas fa-external-link-alt"></i> My AfrikaLearns Portfolio
+                        </a>
+                        <a href="https://sites.google.com/view/afrikalearns/for-students?authuser=0" target="_blank" class="program-link animate-fade-in-up" style="animation-delay: 0.8s">
+                            <i class="fas fa-globe"></i> AfrikaLearns Program
+                        </a>
+                    </div>
+                    
+                    <div class="program-impact">
+                        <h4><i class="fas fa-bullseye"></i> Key Outcomes:</h4>
+                        <ul class="impact-list">
+                            <li>Enhanced cross-cultural communication skills</li>
+                            <li>Developed peer mentoring and tutoring abilities</li>
+                            <li>Gained experience in collaborative learning environments</li>
+                            <li>Built international educational network</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="media-gallery">
+                    <div class="gallery-item animate-zoom-in">
+                        <img src="assets/images/Afrikalearns 1.jpg" alt="AfrikaLearns Session 1" class="gallery-img">
+                        <div class="gallery-caption">
+                            <h4>AfrikaLearns Session</h4>
+                            <p>Learning and collaboration</p>
+                        </div>
+                        <div class="ai-hover-effect">
+                            <i class="fas fa-eye"></i>
                         </div>
                     </div>
                     
-                    <div class="media-item">
-                        <i class="fas fa-network-wired"></i>
-                        <div>
-                            <h4>Global Network</h4>
-                            <p>Connected with diverse international student community</p>
+                    <div class="gallery-item animate-zoom-in" style="animation-delay: 0.2s">
+                        <img src="assets/images/Afrikalearns 2.jpg" alt="AfrikaLearns Session 2" class="gallery-img">
+                        <div class="gallery-caption">
+                            <h4>Workshop Participation</h4>
+                            <p>Interactive learning experience</p>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="program-links">
-                    <a href="https://sites.google.com/view/bright-safari/home" target="_blank" class="program-link">
-                        <i class="fas fa-external-link-alt"></i> My AfrikaLearns Portfolio
-                    </a>
-                    <a href="https://sites.google.com/view/afrikalearns/for-students?authuser=0" target="_blank" class="program-link">
-                        <i class="fas fa-globe"></i> AfrikaLearns Program
-                    </a>
-                </div>
-                
-                <div class="program-impact">
-                    <h4><i class="fas fa-bullseye"></i> Key Outcomes:</h4>
-                    <ul class="impact-list">
-                        <li>Enhanced cross-cultural communication skills</li>
-                        <li>Developed peer mentoring and tutoring abilities</li>
-                        <li>Gained experience in collaborative learning environments</li>
-                        <li>Built international educational network</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="media-gallery">
-                <div class="gallery-item">
-                    <img src="assets/images/Afrikalearns 1.jpg" alt="AfrikaLearns Session 1" class="gallery-img">
-                    <div class="gallery-caption">
-                        <h4>AfrikaLearns Session</h4>
-                        <p>Learning and collaboration</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="assets/images/Afrikalearns 2.jpg" alt="AfrikaLearns Session 2" class="gallery-img">
-                    <div class="gallery-caption">
-                        <h4>Workshop Participation</h4>
-                        <p>Interactive learning experience</p>
+                        <div class="ai-hover-effect">
+                            <i class="fas fa-eye"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Projects Section -->
     <section class="projects" id="projects">
@@ -346,18 +375,20 @@
             </h2>
             <div class="projects-grid">
                 <!-- Church Attendance App -->
-                <div class="project-card">
+                <div class="project-card animate-slide-in-up">
                     <div class="project-header">
                         <div class="project-badge">
                             <i class="fas fa-rocket"></i> Live Project
                         </div>
                         <h3 class="project-title">Church Attendance App</h3>
+                        <div class="ai-sparkle-small"></div>
                     </div>
                     
                     <div class="project-image">
                         <div class="project-icon">
                             <i class="fas fa-church"></i>
                         </div>
+                        <div class="ai-circuit"></div>
                     </div>
                     
                     <div class="project-content">
@@ -380,18 +411,20 @@
                 </div>
 
                 <!-- Full-Stack Development -->
-                <div class="project-card">
+                <div class="project-card animate-slide-in-up" style="animation-delay: 0.2s">
                     <div class="project-header">
                         <div class="project-badge">
                             <i class="fas fa-server"></i> Backend
                         </div>
                         <h3 class="project-title">Full-Stack Development</h3>
+                        <div class="ai-sparkle-small"></div>
                     </div>
                     
                     <div class="project-image">
                         <div class="project-icon">
                             <i class="fas fa-laptop-code"></i>
                         </div>
+                        <div class="ai-circuit"></div>
                     </div>
                     
                     <div class="project-content">
@@ -426,7 +459,7 @@
             
             <div class="skills-accordion">
                 <!-- Frontend Skills -->
-                <div class="accordion-item">
+                <div class="accordion-item animate-fade-in-up">
                     <button class="accordion-header">
                         <i class="fas fa-laptop-code"></i>
                         <span>Frontend Development</span>
@@ -437,25 +470,25 @@
                             <div class="skill-item">
                                 <span class="skill-name">Next.js</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 85%"></div>
+                                    <div class="skill-level animate-progress" style="width: 85%" data-value="85"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">React</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 80%"></div>
+                                    <div class="skill-level animate-progress" style="width: 80%" data-value="80"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">HTML/CSS</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 90%"></div>
+                                    <div class="skill-level animate-progress" style="width: 90%" data-value="90"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">JavaScript</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 75%"></div>
+                                    <div class="skill-level animate-progress" style="width: 75%" data-value="75"></div>
                                 </div>
                             </div>
                         </div>
@@ -463,7 +496,7 @@
                 </div>
 
                 <!-- Backend Skills -->
-                <div class="accordion-item">
+                <div class="accordion-item animate-fade-in-up" style="animation-delay: 0.1s">
                     <button class="accordion-header">
                         <i class="fas fa-server"></i>
                         <span>Backend & Database</span>
@@ -474,25 +507,25 @@
                             <div class="skill-item">
                                 <span class="skill-name">Fast API (Python)</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 80%"></div>
+                                    <div class="skill-level animate-progress" style="width: 80%" data-value="80"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">PostgreSQL</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 75%"></div>
+                                    <div class="skill-level animate-progress" style="width: 75%" data-value="75"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">REST APIs</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 85%"></div>
+                                    <div class="skill-level animate-progress" style="width: 85%" data-value="85"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">Python</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 85%"></div>
+                                    <div class="skill-level animate-progress" style="width: 85%" data-value="85"></div>
                                 </div>
                             </div>
                         </div>
@@ -500,7 +533,7 @@
                 </div>
 
                 <!-- Tools & Certifications -->
-                <div class="accordion-item">
+                <div class="accordion-item animate-fade-in-up" style="animation-delay: 0.2s">
                     <button class="accordion-header">
                         <i class="fas fa-tools"></i>
                         <span>Tools & Certifications</span>
@@ -511,25 +544,25 @@
                             <div class="skill-item">
                                 <span class="skill-name">ICDL Certified</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 95%"></div>
+                                    <div class="skill-level animate-progress" style="width: 95%" data-value="95"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">Git & GitHub</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 80%"></div>
+                                    <div class="skill-level animate-progress" style="width: 80%" data-value="80"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">Cybersecurity</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 70%"></div>
+                                    <div class="skill-level animate-progress" style="width: 70%" data-value="70"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
                                 <span class="skill-name">Video Production</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 75%"></div>
+                                    <div class="skill-level animate-progress" style="width: 75%" data-value="75"></div>
                                 </div>
                             </div>
                         </div>
@@ -538,32 +571,32 @@
             </div>
 
             <!-- ICDL Badges -->
-            <div class="icdl-badges">
+            <div class="icdl-badges animate-fade-in-up" style="animation-delay: 0.3s">
                 <h3 class="badges-title">
                     <i class="fas fa-shield-alt"></i> ICDL Certified Skills
                 </h3>
                 <div class="badges-grid">
-                    <div class="badge-item">
+                    <div class="badge-item animate-bounce">
                         <i class="fas fa-robot"></i>
                         <span>Artificial Intelligence</span>
                     </div>
-                    <div class="badge-item">
+                    <div class="badge-item animate-bounce" style="animation-delay: 0.1s">
                         <i class="fas fa-shield-halved"></i>
                         <span>Cyber Security</span>
                     </div>
-                    <div class="badge-item">
+                    <div class="badge-item animate-bounce" style="animation-delay: 0.2s">
                         <i class="fas fa-chart-line"></i>
                         <span>Digital Marketing</span>
                     </div>
-                    <div class="badge-item">
+                    <div class="badge-item animate-bounce" style="animation-delay: 0.3s">
                         <i class="fas fa-image"></i>
                         <span>Image Editing</span>
                     </div>
-                    <div class="badge-item">
+                    <div class="badge-item animate-bounce" style="animation-delay: 0.4s">
                         <i class="fas fa-cogs"></i>
                         <span>Robotics</span>
                     </div>
-                    <div class="badge-item">
+                    <div class="badge-item animate-bounce" style="animation-delay: 0.5s">
                         <i class="fas fa-file-alt"></i>
                         <span>Documents</span>
                     </div>
@@ -581,7 +614,7 @@
             
             <div class="achievements-grid">
                 <!-- ICDL Certificate -->
-                <div class="achievement-card">
+                <div class="achievement-card animate-slide-in-up">
                     <div class="achievement-icon">
                         <i class="fas fa-certificate"></i>
                     </div>
@@ -593,10 +626,11 @@
                         <span class="achievement-tag">Certified</span>
                         <span class="achievement-tag">10 Modules</span>
                     </div>
+                    <div class="ai-glow-small"></div>
                 </div>
 
                 <!-- STEM Ambassador -->
-                <div class="achievement-card">
+                <div class="achievement-card animate-slide-in-up" style="animation-delay: 0.1s">
                     <div class="achievement-icon">
                         <i class="fas fa-atom"></i>
                     </div>
@@ -608,10 +642,11 @@
                         <span class="achievement-tag">e3empower KOICA</span>
                         <span class="achievement-tag">2023</span>
                     </div>
+                    <div class="ai-glow-small"></div>
                 </div>
 
                 <!-- Leadership Excellence -->
-                <div class="achievement-card">
+                <div class="achievement-card animate-slide-in-up" style="animation-delay: 0.2s">
                     <div class="achievement-icon">
                         <i class="fas fa-flag"></i>
                     </div>
@@ -623,10 +658,11 @@
                         <span class="achievement-tag">Arusha Science</span>
                         <span class="achievement-tag">2025</span>
                     </div>
+                    <div class="ai-glow-small"></div>
                 </div>
 
                 <!-- Boeing Innovation -->
-                <div class="achievement-card">
+                <div class="achievement-card animate-slide-in-up" style="animation-delay: 0.3s">
                     <div class="achievement-icon">
                         <i class="fas fa-plane"></i>
                     </div>
@@ -638,6 +674,7 @@
                         <span class="achievement-tag">Innovation</span>
                         <span class="achievement-tag">Aerospace</span>
                     </div>
+                    <div class="ai-glow-small"></div>
                 </div>
             </div>
         </div>
@@ -651,19 +688,19 @@
             </h2>
             
             <div class="contact-options">
-                <div class="contact-option">
+                <div class="contact-option animate-fade-in-up">
                     <i class="fas fa-envelope"></i>
                     <h3>Email</h3>
                     <p>safaribright93@gmail.com</p>
                     <a href="mailto:safaribright93@gmail.com" class="contact-option-btn">Send Email</a>
                 </div>
-                <div class="contact-option">
+                <div class="contact-option animate-fade-in-up" style="animation-delay: 0.1s">
                     <i class="fab fa-whatsapp"></i>
                     <h3>WhatsApp</h3>
                     <p>+255 748 042 678</p>
                     <a href="https://wa.me/255748042678" target="_blank" class="contact-option-btn">Message</a>
                 </div>
-                <div class="contact-option">
+                <div class="contact-option animate-fade-in-up" style="animation-delay: 0.2s">
                     <i class="fas fa-phone"></i>
                     <h3>SMS</h3>
                     <p>+255 748 042 678</p>
@@ -672,35 +709,35 @@
             </div>
 
             <div class="contact-content">
-                <div class="contact-info">
+                <div class="contact-info animate-slide-in-left">
                     <h3 class="contact-subtitle">Get In Touch</h3>
                     <p class="contact-description">
                         I'm always excited to discuss technology, AI innovations, cybersecurity, 
                         or potential collaborations. Let's connect and explore opportunities!
                     </p>
                     <div class="contact-details">
-                        <div class="contact-item">
+                        <div class="contact-item animate-fade-in-up">
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Email</h4>
                                 <p>safaribright93@gmail.com</p>
                             </div>
                         </div>
-                        <div class="contact-item">
+                        <div class="contact-item animate-fade-in-up" style="animation-delay: 0.1s">
                             <i class="fas fa-phone"></i>
                             <div>
                                 <h4>Phone/SMS/WhatsApp</h4>
                                 <p>+255 748 042 678</p>
                             </div>
                         </div>
-                        <div class="contact-item">
+                        <div class="contact-item animate-fade-in-up" style="animation-delay: 0.2s">
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <h4>Location</h4>
                                 <p>Cape Town, South Africa</p>
                             </div>
                         </div>
-                        <div class="contact-item">
+                        <div class="contact-item animate-fade-in-up" style="animation-delay: 0.3s">
                             <i class="fas fa-graduation-cap"></i>
                             <div>
                                 <h4>Education</h4>
@@ -711,7 +748,7 @@
                     </div>
                 </div>
                 
-                <div class="contact-form-container">
+                <div class="contact-form-container animate-slide-in-right">
                     <form id="contactForm" action="https://formsubmit.co/safaribright93@gmail.com" method="POST">
                         <input type="hidden" name="_subject" value="New message from Portfolio!">
                         <input type="hidden" name="_template" value="table">
@@ -743,24 +780,37 @@
                         <button type="submit" class="btn btn-primary" id="submitBtn">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
+                        <div class="ai-form-indicator">
+                            <div class="ai-processing"></div>
+                            <span>AI-enhanced contact form</span>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-copyright">
-        <p>&copy; 2026 Bright Safari. All rights reserved.</p>
-        <p>Portfolio hosted at <a href="https://brightsafari.space">brightsafari.space</a></p>
-    </div>
-</footer>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-copyright">
+            <p>&copy; 2026 Bright Safari. All rights reserved.</p>
+            <p>Portfolio hosted at <a href="https://brightsafari.space">brightsafari.space</a></p>
+            <div class="ai-footer-signature">
+                <i class="fas fa-robot"></i> Powered by AI Innovation
+            </div>
+        </div>
+    </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/255748042678" target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/255748042678" target="_blank" class="whatsapp-float animate-pulse">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- AI Assistant Chat Button -->
+    <button class="ai-assistant" id="aiAssistant">
+        <i class="fas fa-robot"></i>
+        <span class="ai-pulse"></span>
+    </button>
 
     <script src="scripts/main.js"></script>
 </body>
