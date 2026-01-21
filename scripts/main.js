@@ -261,23 +261,98 @@ function initEventListeners() {
     });
 }
 
-// Add to existing main.js file, after the initEventListeners function
+// Add this to your main.js file
 
-// Initialize Gallery Animations
+// FIXED: Initialize Gallery Animations
 function initGalleryAnimations() {
     const galleryItems = document.querySelectorAll('.gallery-item');
     
     galleryItems.forEach(item => {
+        // Ensure animations work
+        item.style.opacity = '1';
+        item.style.visibility = 'visible';
+        
         // Add hover effects
         item.addEventListener('mouseenter', () => {
-            // Add particle effect
-            addGalleryParticles(item);
+            // Ensure overlay is triggered
+            const overlay = item.querySelector('.gallery-overlay');
+            if (overlay) {
+                overlay.style.opacity = '1';
+                overlay.style.transform = 'translate(0, 0)';
+            }
             
-            // Add ripple effect
-            createRippleEffect(item);
+            // Trigger content animations
+            const content = item.querySelector('.gallery-content');
+            const icon = item.querySelector('.gallery-icon');
+            const tags = item.querySelectorAll('.gallery-tag');
+            
+            if (content) {
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }
+            
+            if (icon) {
+                icon.style.opacity = '1';
+                icon.style.transform = 'scale(1)';
+            }
+            
+            tags.forEach((tag, index) => {
+                tag.style.opacity = '1';
+                tag.style.transform = 'translateY(0)';
+                tag.style.transitionDelay = `${0.4 + (index * 0.1)}s`;
+            });
         });
         
-        // Touch interactions for mobile
+        item.addEventListener('mouseleave', () => {
+            // Reset to default state
+            const overlay = item.querySelector('.gallery-overlay');
+            const animation = item.getAttribute('data-animation');
+            
+            if (overlay) {
+                overlay.style.opacity = '0';
+                
+                // Reset to original animation position
+                switch(animation) {
+                    case 'slide-top-left':
+                        overlay.style.transform = 'translate(-100%, -100%)';
+                        break;
+                    case 'slide-top-right':
+                        overlay.style.transform = 'translate(100%, -100%)';
+                        break;
+                    case 'slide-bottom-left':
+                        overlay.style.transform = 'translate(-100%, 100%)';
+                        break;
+                    case 'slide-bottom-right':
+                        overlay.style.transform = 'translate(100%, 100%)';
+                        break;
+                }
+            }
+            
+            // Reset content
+            const content = item.querySelector('.gallery-content');
+            const icon = item.querySelector('.gallery-icon');
+            const tags = item.querySelectorAll('.gallery-tag');
+            
+            if (content) {
+                content.style.opacity = '0';
+                content.style.transform = 'translateY(30px)';
+                content.style.transitionDelay = '0s';
+            }
+            
+            if (icon) {
+                icon.style.opacity = '0';
+                icon.style.transform = 'scale(0)';
+                icon.style.transitionDelay = '0s';
+            }
+            
+            tags.forEach(tag => {
+                tag.style.opacity = '0';
+                tag.style.transform = 'translateY(10px)';
+                tag.style.transitionDelay = '0s';
+            });
+        });
+        
+        // Touch support for mobile
         item.addEventListener('touchstart', () => {
             item.classList.add('touch-active');
         }, { passive: true });
@@ -285,32 +360,38 @@ function initGalleryAnimations() {
         item.addEventListener('touchend', () => {
             item.classList.remove('touch-active');
             
-            // Trigger animation on tap
+            // Trigger hover effect on tap
             setTimeout(() => {
-                addGalleryParticles(item);
-                createRippleEffect(item);
+                item.dispatchEvent(new Event('mouseenter'));
+                
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    item.dispatchEvent(new Event('mouseleave'));
+                }, 3000);
             }, 100);
         }, { passive: true });
     });
     
-    // Initialize intersection observer for gallery items
+    // Initialize intersection observer
     const galleryObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-                
-                // Add staggered animation for gallery items
                 const items = entry.target.querySelectorAll('.gallery-item');
                 items.forEach((item, index) => {
                     setTimeout(() => {
                         item.classList.add('visible');
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
                     }, index * 200);
                 });
                 
                 galleryObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.2 });
+    }, { 
+        threshold: 0.1,
+        rootMargin: '50px'
+    });
     
     // Observe gallery sections
     const gallerySections = document.querySelectorAll('.media-production, .afrikalearns');
@@ -319,233 +400,116 @@ function initGalleryAnimations() {
     });
 }
 
-// Add particle effect to gallery items
-function addGalleryParticles(galleryItem) {
-    // Create particles container if not exists
-    let particlesContainer = galleryItem.querySelector('.gallery-particles');
+// FIXED: Image loading with fallback
+function loadGalleryImages() {
+    const galleryImages = document.querySelectorAll('.gallery-img');
     
-    if (!particlesContainer) {
-        particlesContainer = document.createElement('div');
-        particlesContainer.className = 'gallery-particles';
-        particlesContainer.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            overflow: hidden;
-        `;
-        galleryItem.appendChild(particlesContainer);
-    }
-    
-    // Clear existing particles
-    particlesContainer.innerHTML = '';
-    
-    // Create new particles
-    const particleCount = 15;
-    const colors = galleryItem.closest('.afrikalearns') 
-        ? ['#22c55e', '#3b82f6', '#10b981']
-        : galleryItem.closest('.media-production')
-        ? ['#ff0080', '#00d4ff', '#a855f7']
-        : ['#00d4ff', '#a855f7', '#10b981'];
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'gallery-particle';
+    galleryImages.forEach(img => {
+        // Add loading class
+        img.classList.add('loading');
         
-        // Random properties
-        const size = Math.random() * 6 + 2;
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const duration = Math.random() * 1 + 0.5;
-        
-        particle.style.cssText = `
-            position: absolute;
-            width: ${size}px;
-            height: ${size}px;
-            background: ${color};
-            border-radius: 50%;
-            left: ${x}%;
-            top: ${y}%;
-            opacity: 0;
-            transform: scale(0);
-            animation: particlePop ${duration}s ease-out;
-            box-shadow: 0 0 10px ${color};
-        `;
-        
-        particlesContainer.appendChild(particle);
-        
-        // Remove particle after animation
-        setTimeout(() => {
-            particle.remove();
-        }, duration * 1000);
-    }
+        // Check if image is already loaded
+        if (img.complete) {
+            img.classList.remove('loading');
+            img.classList.add('loaded');
+        } else {
+            // Load image
+            img.onload = function() {
+                this.classList.remove('loading');
+                this.classList.add('loaded');
+                
+                // Trigger parent animation
+                const parent = this.closest('.gallery-item');
+                if (parent) {
+                    parent.classList.add('image-loaded');
+                }
+            };
+            
+            img.onerror = function() {
+                this.classList.remove('loading');
+                console.error('Failed to load image:', this.src);
+            };
+        }
+    });
 }
 
-// Create ripple effect on gallery item
-function createRippleEffect(galleryItem) {
-    const ripple = document.createElement('div');
-    ripple.className = 'gallery-ripple';
-    
-    const rect = galleryItem.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    
-    ripple.style.cssText = `
-        position: absolute;
-        width: ${size}px;
-        height: ${size}px;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        border-radius: 50%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        animation: rippleEffect 0.6s ease-out;
-        pointer-events: none;
-        z-index: 1;
-    `;
-    
-    galleryItem.appendChild(ripple);
-    
-    // Remove ripple after animation
-    setTimeout(() => {
-        ripple.remove();
-    }, 600);
-}
-
-// Add CSS for gallery animations
-const galleryAnimationsCSS = document.createElement('style');
-galleryAnimationsCSS.textContent = `
-    @keyframes particlePop {
-        0% {
-            opacity: 0;
-            transform: scale(0);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1);
-        }
-        100% {
-            opacity: 0;
-            transform: scale(0) translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
-        }
-    }
-    
-    @keyframes rippleEffect {
-        0% {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 1;
-        }
-        100% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0;
-        }
-    }
-    
-    /* Gallery visibility animations */
-    .gallery-item {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    
-    .gallery-item.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    /* Touch feedback */
-    .gallery-item.touch-active {
-        transform: scale(0.98);
-    }
-    
-    /* Gallery loading animation */
-    .gallery-item::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        transform: translateX(-100%);
-        animation: loading 1.5s infinite;
-    }
-    
-    .gallery-item.loaded::after {
-        animation: none;
-        display: none;
-    }
-    
-    @keyframes loading {
-        100% {
-            transform: translateX(100%);
-        }
-    }
-    
-    /* Performance optimizations */
-    @media (prefers-reduced-motion: reduce) {
-        .gallery-item {
-            transition: none !important;
-            animation: none !important;
-        }
-        
-        .gallery-particle,
-        .gallery-ripple {
-            display: none !important;
-        }
-    }
-`;
-
-document.head.appendChild(galleryAnimationsCSS);
-
-// Update the DOMContentLoaded event listener to include gallery animations
-// Add this to your existing DOMContentLoaded event listener:
+// Add to DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', () => {
-    // ... existing initialization code ...
+    // ... existing code ...
     
     // Initialize gallery animations
     initGalleryAnimations();
     
-    // ... rest of existing code ...
+    // Load gallery images
+    loadGalleryImages();
+    
+    // ... rest of code ...
 });
 
-// Add image lazy loading for gallery
-function initGalleryLazyLoading() {
-    const galleryImages = document.querySelectorAll('.gallery-img[data-src]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    
-                    // Add loaded class for animation
-                    img.onload = () => {
-                        img.closest('.gallery-item').classList.add('loaded');
-                    };
-                    
-                    imageObserver.unobserve(img);
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        galleryImages.forEach(img => imageObserver.observe(img));
+// Add CSS for gallery fixes
+const galleryFixCSS = document.createElement('style');
+galleryFixCSS.textContent = `
+    /* FIXED: Ensure gallery items are visible */
+    .gallery-item {
+        visibility: visible !important;
+        opacity: 1 !important;
     }
-}
-
-// Update initLazyLoading to include gallery images
-// In your existing initLazyLoading function, add:
-function initLazyLoading() {
-    // ... existing lazy loading code ...
     
-    // Also initialize gallery lazy loading
-    initGalleryLazyLoading();
-}
+    /* FIXED: Animation states */
+    .gallery-item.visible {
+        animation: fadeInUp 0.6s ease forwards !important;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* FIXED: Touch feedback */
+    .gallery-item.touch-active {
+        transform: scale(0.98) !important;
+        transition: transform 0.2s ease !important;
+    }
+    
+    /* FIXED: Ensure overlay is above image */
+    .gallery-overlay {
+        z-index: 2 !important;
+    }
+    
+    /* FIXED: Image loading animation */
+    @keyframes imageFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .gallery-img.loaded {
+        animation: imageFadeIn 0.5s ease forwards;
+    }
+    
+    /* FIXED: Fallback for browsers without backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+        .gallery-overlay {
+            background: rgba(0, 0, 0, 0.85) !important;
+        }
+        
+        .gallery-icon i {
+            background: rgba(255, 255, 255, 0.3) !important;
+        }
+        
+        .gallery-tag {
+            background: rgba(255, 255, 255, 0.25) !important;
+        }
+    }
+`;
+
+document.head.appendChild(galleryFixCSS);
+
 
 // Smooth scrolling for anchor links
 function initSmoothScrolling() {
