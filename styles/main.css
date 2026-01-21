@@ -10,7 +10,7 @@
     --primary-color: #2563eb;
     --secondary-color: #7c3aed;
     --accent-color: #06b6d4;
-    --ai-color: #10b981;
+    --ai-color: #13abf1;
     --neon-blue: #00d4ff;
     --neon-purple: #a855f7;
     --text-color: #ffffff;
@@ -2151,7 +2151,7 @@ h1, h2, h3, h4 {
 }
 
 .afrikalearns .media-item p {
-    color: #94a3b8;
+    color: var(--neon-blue);
     font-size: 0.875rem;
 }
 
