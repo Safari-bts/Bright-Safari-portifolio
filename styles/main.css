@@ -2090,7 +2090,7 @@ h1, h2, h3, h4 {
     left: 0;
     width: 5px;
     height: 100%;
-    background: linear-gradient(180deg, #22c55e, var(--neon-blue));
+    background: linear-gradient(180deg, #2291c5, var(--neon-blue));
     animation: glow 2s ease-in-out infinite alternate;
 }
 
