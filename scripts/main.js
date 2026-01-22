@@ -70,6 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize Intersection Observer for animations
     initAnimationObserver();
+    
+    // Initialize gallery animations - IMPORTANT!
+    initGalleryAnimations();
+    
+    // Load gallery images
+    loadGalleryImages();
+    
+    // Equalize card heights
+    setTimeout(() => {
+        equalizeCardHeights();
+    }, 500);
 });
 
 // Theme Toggle Functionality - UPDATED
@@ -257,13 +268,110 @@ function initEventListeners() {
             if (isMobile() && !menuOpen) {
                 closeMobileMenu();
             }
+            // Re-equalize card heights on resize
+            equalizeCardHeights();
         }, 250);
+    });
+    
+    // Add click listeners for gallery items
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            if (isMobile()) {
+                e.preventDefault();
+                toggleGalleryItem(this);
+            }
+        });
     });
 }
 
-// Add this to your main.js file
+// Equalize card heights for better alignment
+function equalizeCardHeights() {
+    // Equalize project cards
+    const projectCards = document.querySelectorAll('.project-card');
+    if (projectCards.length > 0) {
+        let maxHeight = 0;
+        
+        // Reset heights first
+        projectCards.forEach(card => {
+            card.style.height = 'auto';
+        });
+        
+        // Find max height
+        projectCards.forEach(card => {
+            const height = card.offsetHeight;
+            if (height > maxHeight) {
+                maxHeight = height;
+            }
+        });
+        
+        // Apply max height to all cards (only on desktop)
+        if (!isMobile() && maxHeight > 0) {
+            projectCards.forEach(card => {
+                card.style.height = maxHeight + 'px';
+            });
+        }
+    }
+    
+    // Equalize achievement cards
+    const achievementCards = document.querySelectorAll('.achievement-card');
+    if (achievementCards.length > 0) {
+        let maxHeight = 0;
+        
+        // Reset heights first
+        achievementCards.forEach(card => {
+            card.style.height = 'auto';
+        });
+        
+        // Find max height
+        achievementCards.forEach(card => {
+            const height = card.offsetHeight;
+            if (height > maxHeight) {
+                maxHeight = height;
+            }
+        });
+        
+        // Apply max height to all cards (only on desktop)
+        if (!isMobile() && maxHeight > 0) {
+            achievementCards.forEach(card => {
+                card.style.height = maxHeight + 'px';
+            });
+        }
+    }
+    
+    // Equalize gallery items
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    if (galleryItems.length > 0) {
+        let maxHeight = 0;
+        
+        // Reset heights first
+        galleryItems.forEach(item => {
+            item.style.height = 'auto';
+        });
+        
+        // Find max height in each gallery section
+        const galleries = document.querySelectorAll('.media-gallery');
+        galleries.forEach(gallery => {
+            const items = gallery.querySelectorAll('.gallery-item');
+            let galleryMaxHeight = 0;
+            
+            items.forEach(item => {
+                const height = item.offsetHeight;
+                if (height > galleryMaxHeight) {
+                    galleryMaxHeight = height;
+                }
+            });
+            
+            // Apply height to items in this gallery
+            if (galleryMaxHeight > 0) {
+                items.forEach(item => {
+                    item.style.height = galleryMaxHeight + 'px';
+                });
+            }
+        });
+    }
+}
 
-// FIXED: Initialize Gallery Animations
+// Initialize Gallery Animations - FIXED
 function initGalleryAnimations() {
     const galleryItems = document.querySelectorAll('.gallery-item');
     
@@ -357,7 +465,7 @@ function initGalleryAnimations() {
             item.classList.add('touch-active');
         }, { passive: true });
         
-        item.addEventListener('touchend', () => {
+        item.addEventListener('touchend', (e) => {
             item.classList.remove('touch-active');
             
             // Trigger hover effect on tap
@@ -372,7 +480,7 @@ function initGalleryAnimations() {
         }, { passive: true });
     });
     
-    // Initialize intersection observer
+    // Initialize intersection observer for lazy loading animations
     const galleryObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -400,6 +508,68 @@ function initGalleryAnimations() {
     });
 }
 
+// Toggle gallery item on mobile
+function toggleGalleryItem(item) {
+    const overlay = item.querySelector('.gallery-overlay');
+    const content = item.querySelector('.gallery-content');
+    const icon = item.querySelector('.gallery-icon');
+    const tags = item.querySelectorAll('.gallery-tag');
+    
+    const isActive = item.classList.contains('mobile-active');
+    
+    if (isActive) {
+        // Hide overlay
+        item.classList.remove('mobile-active');
+        overlay.style.opacity = '0';
+        
+        // Hide content
+        content.style.opacity = '0';
+        content.style.transform = 'translateY(30px)';
+        
+        // Hide icon
+        icon.style.opacity = '0';
+        icon.style.transform = 'scale(0)';
+        
+        // Hide tags
+        tags.forEach(tag => {
+            tag.style.opacity = '0';
+            tag.style.transform = 'translateY(10px)';
+        });
+    } else {
+        // Show overlay
+        item.classList.add('mobile-active');
+        overlay.style.opacity = '1';
+        overlay.style.transform = 'translate(0, 0)';
+        
+        // Show content
+        setTimeout(() => {
+            content.style.opacity = '1';
+            content.style.transform = 'translateY(0)';
+        }, 200);
+        
+        // Show icon
+        setTimeout(() => {
+            icon.style.opacity = '1';
+            icon.style.transform = 'scale(1)';
+        }, 300);
+        
+        // Show tags
+        tags.forEach((tag, index) => {
+            setTimeout(() => {
+                tag.style.opacity = '1';
+                tag.style.transform = 'translateY(0)';
+            }, 400 + (index * 100));
+        });
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            if (item.classList.contains('mobile-active')) {
+                toggleGalleryItem(item);
+            }
+        }, 5000);
+    }
+}
+
 // FIXED: Image loading with fallback
 function loadGalleryImages() {
     const galleryImages = document.querySelectorAll('.gallery-img');
@@ -423,93 +593,22 @@ function loadGalleryImages() {
                 if (parent) {
                     parent.classList.add('image-loaded');
                 }
+                
+                // Re-equalize heights after image loads
+                setTimeout(() => {
+                    equalizeCardHeights();
+                }, 100);
             };
             
             img.onerror = function() {
                 this.classList.remove('loading');
                 console.error('Failed to load image:', this.src);
+                // Set a fallback background
+                this.parentElement.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
             };
         }
     });
 }
-
-// Add to DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code ...
-    
-    // Initialize gallery animations
-    initGalleryAnimations();
-    
-    // Load gallery images
-    loadGalleryImages();
-    
-    // ... rest of code ...
-});
-
-// Add CSS for gallery fixes
-const galleryFixCSS = document.createElement('style');
-galleryFixCSS.textContent = `
-    /* FIXED: Ensure gallery items are visible */
-    .gallery-item {
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-    
-    /* FIXED: Animation states */
-    .gallery-item.visible {
-        animation: fadeInUp 0.6s ease forwards !important;
-    }
-    
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    /* FIXED: Touch feedback */
-    .gallery-item.touch-active {
-        transform: scale(0.98) !important;
-        transition: transform 0.2s ease !important;
-    }
-    
-    /* FIXED: Ensure overlay is above image */
-    .gallery-overlay {
-        z-index: 2 !important;
-    }
-    
-    /* FIXED: Image loading animation */
-    @keyframes imageFadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    
-    .gallery-img.loaded {
-        animation: imageFadeIn 0.5s ease forwards;
-    }
-    
-    /* FIXED: Fallback for browsers without backdrop-filter */
-    @supports not (backdrop-filter: blur(5px)) {
-        .gallery-overlay {
-            background: rgba(0, 0, 0, 0.85) !important;
-        }
-        
-        .gallery-icon i {
-            background: rgba(255, 255, 255, 0.3) !important;
-        }
-        
-        .gallery-tag {
-            background: rgba(255, 255, 255, 0.25) !important;
-        }
-    }
-`;
-
-document.head.appendChild(galleryFixCSS);
-
 
 // Smooth scrolling for anchor links
 function initSmoothScrolling() {
@@ -1055,6 +1154,34 @@ function initMobileOptimizations() {
         element.style.minHeight = '44px';
         element.style.minWidth = '44px';
     });
+    
+    // Add mobile-specific gallery styles
+    const mobileGalleryCSS = document.createElement('style');
+    mobileGalleryCSS.textContent = `
+        @media (max-width: 768px) {
+            .gallery-item.mobile-active .gallery-overlay {
+                opacity: 1 !important;
+                transform: translate(0, 0) !important;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7) 70%) !important;
+            }
+            
+            .gallery-item.mobile-active .gallery-content {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+            
+            .gallery-item.mobile-active .gallery-icon {
+                opacity: 1 !important;
+                transform: scale(1) !important;
+            }
+            
+            .gallery-item.mobile-active .gallery-tag {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        }
+    `;
+    document.head.appendChild(mobileGalleryCSS);
 }
 
 // Touch interactions for mobile
@@ -1115,6 +1242,8 @@ function handleOrientationChange() {
         if (isMobile()) {
             initMobileOptimizations();
         }
+        // Re-equalize card heights
+        equalizeCardHeights();
     }, 300);
 }
 
