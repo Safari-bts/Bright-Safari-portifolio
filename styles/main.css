@@ -247,6 +247,15 @@ h1, h2, h3, h4 {
     }
 }
 
+@keyframes shine {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
 /* Animation Classes */
 .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
@@ -904,15 +913,6 @@ h1, h2, h3, h4 {
     animation: shine 3s infinite;
 }
 
-@keyframes shine {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
-
 .ai-highlight-box h3 {
     color: var(--neon-blue);
     font-size: 1.25rem;
@@ -987,7 +987,8 @@ h1, h2, h3, h4 {
     border: 1px solid rgba(0, 212, 255, 0.1);
     position: relative;
     height: 100%;
-    min-height: 300px;
+    display: flex;
+    flex-direction: column;
 }
 
 .boeing-card:hover .ai-sparkle {
@@ -999,6 +1000,7 @@ h1, h2, h3, h4 {
     position: relative;
     height: 250px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .boeing-img {
@@ -1027,30 +1029,22 @@ h1, h2, h3, h4 {
     animation: pulse 2s ease-in-out infinite;
 }
 
-.boeing-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    padding: 1rem;
-    color: white;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
+.boeing-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
-.boeing-card:hover .boeing-overlay {
-    transform: translateY(0);
-}
-
-.boeing-overlay h4 {
+.boeing-content h4 {
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
 }
 
-.boeing-overlay p {
+.boeing-content p {
     font-size: 0.875rem;
     color: #cbd5e1;
+    margin-top: auto;
 }
 
 /* Media Production */
@@ -1149,6 +1143,7 @@ h1, h2, h3, h4 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    align-items: stretch;
 }
 
 .gallery-item {
@@ -1167,6 +1162,13 @@ h1, h2, h3, h4 {
     box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1);
 }
 
+.gallery-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 .gallery-img {
     width: 100%;
     height: 100%;
@@ -1179,22 +1181,184 @@ h1, h2, h3, h4 {
     transform: scale(1.05);
 }
 
-.gallery-caption {
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.7);
-    position: relative;
+/* Gallery Overlay Animations */
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
     z-index: 2;
 }
 
-.gallery-caption h4 {
-    color: white;
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
+/* Different entrance animations */
+.gallery-item[data-animation="slide-top-left"] .gallery-overlay {
+    transform: translate(-100%, -100%);
 }
 
-.gallery-caption p {
-    color: #cbd5e1;
-    font-size: 0.875rem;
+.gallery-item[data-animation="slide-top-right"] .gallery-overlay {
+    transform: translate(100%, -100%);
+}
+
+.gallery-item[data-animation="slide-bottom-left"] .gallery-overlay {
+    transform: translate(-100%, 100%);
+}
+
+.gallery-item[data-animation="slide-bottom-right"] .gallery-overlay {
+    transform: translate(100%, 100%);
+}
+
+/* Always show overlay on hover with animation */
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+    transform: translate(0, 0) !important;
+}
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.08);
+}
+
+/* Gallery Content Animations */
+.gallery-content {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-icon {
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+    align-self: flex-end;
+}
+
+/* Trigger content animations when overlay is shown */
+.gallery-item:hover .gallery-content {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+.gallery-item:hover .gallery-icon {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.3s;
+}
+
+/* Background gradients with transparency */
+.media-production .gallery-overlay {
+    background: linear-gradient(135deg, rgba(255, 0, 128, 0.85), rgba(0, 212, 255, 0.6));
+}
+
+.afrikalearns .gallery-overlay {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.85), rgba(59, 130, 246, 0.6));
+}
+
+/* Gallery Content Styling */
+.gallery-title {
+    color: white;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.gallery-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease 0.4s;
+}
+
+.gallery-item:hover .gallery-title::after {
+    transform: scaleX(1);
+}
+
+.gallery-description {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    max-width: 90%;
+    font-weight: 400;
+}
+
+/* Gallery Tags */
+.gallery-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+.gallery-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-tag {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Staggered tag animations */
+.gallery-item:hover .gallery-tag:nth-child(1) {
+    transition-delay: 0.4s;
+}
+
+.gallery-item:hover .gallery-tag:nth-child(2) {
+    transition-delay: 0.5s;
+}
+
+.gallery-item:hover .gallery-tag:nth-child(3) {
+    transition-delay: 0.6s;
+}
+
+/* Gallery Icon */
+.gallery-icon i {
+    font-size: 2rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover .gallery-icon i {
+    transform: rotate(360deg);
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Projects Section - FIXED CARD ALIGNMENT */
@@ -1206,6 +1370,7 @@ h1, h2, h3, h4 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    align-items: stretch;
 }
 
 .project-card {
@@ -1216,7 +1381,6 @@ h1, h2, h3, h4 {
     position: relative;
     transition: var(--transition);
     height: 100%;
-    min-height: 480px;
     display: flex;
     flex-direction: column;
 }
@@ -1576,6 +1740,7 @@ h1, h2, h3, h4 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    align-items: stretch;
 }
 
 .badge-item {
@@ -1586,12 +1751,13 @@ h1, h2, h3, h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
     text-align: center;
     transition: var(--transition);
     cursor: default;
+    height: 100%;
     min-height: 120px;
-    justify-content: center;
 }
 
 .badge-item:hover {
@@ -1631,6 +1797,7 @@ h1, h2, h3, h4 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    align-items: stretch;
 }
 
 .achievement-card {
@@ -1643,7 +1810,6 @@ h1, h2, h3, h4 {
     overflow: hidden;
     transition: var(--transition);
     height: 100%;
-    min-height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1741,6 +1907,7 @@ h1, h2, h3, h4 {
     grid-template-columns: 1fr;
     gap: 1rem;
     margin-bottom: 2rem;
+    align-items: stretch;
 }
 
 .contact-option {
@@ -1753,7 +1920,6 @@ h1, h2, h3, h4 {
     position: relative;
     overflow: hidden;
     height: 100%;
-    min-height: 220px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2289,6 +2455,7 @@ h1, h2, h3, h4 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    align-items: stretch;
 }
 
 .afrikalearns .gallery-item {
@@ -2359,44 +2526,6 @@ h1, h2, h3, h4 {
 .afrikalearns .gallery-caption p {
     color: #cbd5e1;
     font-size: 0.875rem;
-}
-
-/* Desktop styles for AfrikaLearns */
-@media (min-width: 768px) {
-    .afrikalearns .media-content {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-    
-    .afrikalearns .media-text {
-        flex: 1;
-    }
-    
-    .afrikalearns .media-gallery {
-        flex: 1;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .afrikalearns .program-links {
-        flex-direction: row;
-    }
-    
-    .afrikalearns .program-link {
-        flex: 1;
-        justify-content: center;
-        text-align: center;
-    }
-    
-    .afrikalearns .impact-list {
-        columns: 2;
-        column-gap: 2rem;
-    }
-}
-
-@media (min-width: 992px) {
-    .afrikalearns .media-text h3 {
-        font-size: 1.8rem;
-    }
 }
 
 /* Desktop Styles - FIXED CARD ALIGNMENTS */
@@ -2511,7 +2640,6 @@ h1, h2, h3, h4 {
     
     .boeing-card {
         flex: 1;
-        min-height: auto;
         height: auto;
     }
     
@@ -2540,7 +2668,6 @@ h1, h2, h3, h4 {
     }
     
     .project-card {
-        min-height: 480px;
         height: 100%;
     }
     
@@ -2552,7 +2679,6 @@ h1, h2, h3, h4 {
     }
     
     .achievement-card {
-        min-height: 250px;
         height: 100%;
     }
     
@@ -2560,10 +2686,10 @@ h1, h2, h3, h4 {
     .contact-options {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
+        align-items: stretch;
     }
     
     .contact-option {
-        min-height: 220px;
         height: 100%;
     }
     
@@ -2603,10 +2729,42 @@ h1, h2, h3, h4 {
     .badges-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
+        align-items: stretch;
     }
     
     .badge-item {
+        height: 100%;
         min-height: 140px;
+    }
+    
+    /* AfrikaLearns desktop */
+    .afrikalearns .media-content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    .afrikalearns .media-text {
+        flex: 1;
+    }
+    
+    .afrikalearns .media-gallery {
+        flex: 1;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .afrikalearns .program-links {
+        flex-direction: row;
+    }
+    
+    .afrikalearns .program-link {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .afrikalearns .impact-list {
+        columns: 2;
+        column-gap: 2rem;
     }
 }
 
@@ -2630,11 +2788,11 @@ h1, h2, h3, h4 {
     
     /* Ensure consistent card heights on larger screens */
     .project-card {
-        min-height: 500px;
+        height: 100%;
     }
     
     .achievement-card {
-        min-height: 280px;
+        height: 100%;
     }
     
     .badges-grid {
@@ -2642,11 +2800,11 @@ h1, h2, h3, h4 {
     }
     
     .badge-item {
+        height: 100%;
         min-height: 130px;
     }
 }
 
-/* Large Desktop */
 @media (min-width: 1200px) {
     .container {
         max-width: 1140px;
@@ -3013,255 +3171,38 @@ body:not(.dark-theme) .ai-glow {
     }
 }
 
-/* Gallery Item Animations */
-.gallery-image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.gallery-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+/* FIXED: Card equal height utility */
+.card-fixed-height {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 2rem;
-    opacity: 0;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(5px);
-    z-index: 2;
 }
 
-/* Different entrance animations */
-.gallery-item[data-animation="slide-top-left"] .gallery-overlay {
-    transform: translate(-100%, -100%);
+/* FIXED: Ensure content grows properly */
+.card-content-expand {
+    flex-grow: 1;
 }
 
-.gallery-item[data-animation="slide-top-right"] .gallery-overlay {
-    transform: translate(100%, -100%);
+/* FIXED: Grid alignment helper */
+.grid-align-fix {
+    display: grid;
+    align-items: stretch;
 }
 
-.gallery-item[data-animation="slide-bottom-left"] .gallery-overlay {
-    transform: translate(-100%, 100%);
+/* FIXED: Remove min-height constraints that cause misalignment */
+.project-card,
+.achievement-card,
+.contact-option,
+.badge-item {
+    min-height: unset !important;
 }
 
-.gallery-item[data-animation="slide-bottom-right"] .gallery-overlay {
-    transform: translate(100%, 100%);
+/* FIXED: Ensure consistent spacing */
+.section-spacing {
+    margin-bottom: 3rem;
 }
 
-/* Always show overlay on hover with animation */
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-    transform: translate(0, 0) !important;
-}
-
-.gallery-item:hover .gallery-img {
-    transform: scale(1.08);
-}
-
-/* Gallery Content Animations */
-.gallery-content {
-    transform: translateY(30px);
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.gallery-icon {
-    transform: scale(0);
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
-    align-self: flex-end;
-}
-
-/* Trigger content animations when overlay is shown */
-.gallery-item:hover .gallery-content {
-    transform: translateY(0);
-    opacity: 1;
-    transition-delay: 0.2s;
-}
-
-.gallery-item:hover .gallery-icon {
-    transform: scale(1);
-    opacity: 1;
-    transition-delay: 0.3s;
-}
-
-/* Background gradients with transparency */
-.media-production .gallery-overlay {
-    background: linear-gradient(135deg, rgba(255, 0, 128, 0.85), rgba(0, 212, 255, 0.6));
-}
-
-.afrikalearns .gallery-overlay {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.85), rgba(59, 130, 246, 0.6));
-}
-
-/* Light theme adjustments */
-body:not(.dark-theme) .media-production .gallery-overlay {
-    background: linear-gradient(135deg, rgba(255, 0, 128, 0.9), rgba(0, 212, 255, 0.7));
-}
-
-body:not(.dark-theme) .afrikalearns .gallery-overlay {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.9), rgba(59, 130, 246, 0.7));
-}
-
-/* Gallery Content Styling */
-.gallery-title {
-    color: white;
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.gallery-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: white;
-    border-radius: 2px;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease 0.4s;
-}
-
-.gallery-item:hover .gallery-title::after {
-    transform: scaleX(1);
-}
-
-.gallery-description {
-    color: rgba(255, 255, 255, 0.95);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 1.2rem;
-    max-width: 90%;
-    font-weight: 400;
-}
-
-/* Gallery Tags */
-.gallery-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 1rem;
-}
-
-.gallery-tag {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    transform: translateY(10px);
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.gallery-item:hover .gallery-tag {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* Staggered tag animations */
-.gallery-item:hover .gallery-tag:nth-child(1) {
-    transition-delay: 0.4s;
-}
-
-.gallery-item:hover .gallery-tag:nth-child(2) {
-    transition-delay: 0.5s;
-}
-
-.gallery-item:hover .gallery-tag:nth-child(3) {
-    transition-delay: 0.6s;
-}
-
-/* Gallery Icon */
-.gallery-icon i {
-    font-size: 2rem;
-    color: white;
-    background: rgba(255, 255, 255, 0.2);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
-}
-
-.gallery-item:hover .gallery-icon i {
-    transform: rotate(360deg);
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Gallery Item Container */
-.gallery-item {
-    border-radius: 12px;
-    overflow: hidden;
-    border: 2px solid var(--border-color);
-    background: var(--bg-card);
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 280px;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-}
-
-.gallery-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--ai-gradient);
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 0.4s ease;
-}
-
-.gallery-item:hover {
-    border-color: var(--neon-blue);
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.gallery-item:hover::before {
-    opacity: 0.05;
-}
-
-/* Specific border colors on hover */
-.afrikalearns .gallery-item:hover {
-    border-color: #22c55e;
-}
-
-.media-production .gallery-item:hover {
-    border-color: #ff0080;
-}
-
-/* Mobile Responsive for Gallery */
+/* FIXED: Mobile Responsive Adjustments */
 @media (max-width: 768px) {
     .gallery-item {
         height: 220px;
@@ -3297,20 +3238,20 @@ body:not(.dark-theme) .afrikalearns .gallery-overlay {
         font-size: 0.65rem;
     }
     
-    /* Adjust heights for mobile */
     .project-card {
-        min-height: 450px;
+        height: 100%;
     }
     
     .achievement-card {
-        min-height: 230px;
+        height: 100%;
     }
     
     .contact-option {
-        min-height: 200px;
+        height: 100%;
     }
     
     .badge-item {
+        height: 100%;
         min-height: 110px;
     }
 }
@@ -3426,39 +3367,4 @@ body:not(.dark-theme) .afrikalearns .gallery-overlay {
 .gallery-img.loaded {
     opacity: 1;
     transition: opacity 0.5s ease;
-}
-
-/* FIXED: Card equal height utility */
-.equal-height {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.equal-height > * {
-    flex: 1 1 auto;
-}
-
-/* FIXED: Ensure cards don't overflow */
-.card-fixed-height {
-    min-height: 250px;
-    max-height: 500px;
-    overflow: hidden;
-}
-
-/* FIXED: Add consistent spacing */
-.section-spacing {
-    margin-bottom: 3rem;
-}
-
-/* FIXED: Grid alignment helper */
-.grid-align-fix {
-    display: grid;
-    align-items: start;
-}
-
-/* FIXED: Last row alignment for achievements */
-.achievements-grid::after {
-    content: '';
-    flex: auto;
 }
