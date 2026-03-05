@@ -29,28 +29,40 @@
     <!-- End Google Analytics -->
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Cursor Glow (desktop) -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <!-- AI Animated Background Elements -->
     <div class="ai-background">
+        <canvas id="neuralCanvas" class="neural-canvas"></canvas>
         <div class="ai-particle" style="top: 10%; left: 5%;"></div>
         <div class="ai-particle" style="top: 20%; right: 10%;"></div>
         <div class="ai-particle" style="bottom: 30%; left: 15%;"></div>
         <div class="ai-particle" style="bottom: 20%; right: 20%;"></div>
         <div class="ai-particle" style="top: 50%; left: 50%;"></div>
+        <div class="ai-particle ai-particle-lg" style="top: 35%; left: 25%;"></div>
+        <div class="ai-particle ai-particle-sm" style="top: 70%; right: 30%;"></div>
+        <div class="ai-particle ai-particle-purple" style="top: 15%; left: 60%;"></div>
+        <div class="ai-particle ai-particle-purple" style="bottom: 45%; right: 5%;"></div>
+        <div class="ai-particle ai-particle-lg" style="bottom: 10%; left: 45%;"></div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <a href="#home" class="logo">Bright<span class="logo-accent">Safari</span></a>
-            <div class="nav-links">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#production" class="nav-link">Media</a>
-                <a href="#afrikalearns" class="nav-link">AfrikaLearns</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#achievements" class="nav-link">Achievements</a>
-                <a href="#contact" class="nav-link">Contact</a>
+            <div class="nav-links" role="navigation" aria-label="Main navigation">
+                <a href="#home" class="nav-link" data-section="home">Home</a>
+                <a href="#about" class="nav-link" data-section="about">About</a>
+                <a href="#production" class="nav-link" data-section="production">Media</a>
+                <a href="#afrikalearns" class="nav-link" data-section="afrikalearns">AfrikaLearns</a>
+                <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+                <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+                <a href="#achievements" class="nav-link" data-section="achievements">Achievements</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -99,23 +111,23 @@
                         </span>
                     </div>
                     <div class="hero-actions animate-fade-in-up" style="animation-delay: 0.8s">
-                        <a href="#projects" class="btn btn-primary">
+                        <a href="#projects" class="btn btn-primary ripple-btn">
                             <i class="fas fa-code"></i> View Projects
                         </a>
-                        <a href="#contact" class="btn btn-secondary">
+                        <a href="#contact" class="btn btn-secondary ripple-btn">
                             <i class="fas fa-envelope"></i> Contact Me
                         </a>
                     </div>
                     <div class="hero-social animate-fade-in-up" style="animation-delay: 1s">
-                        <a href="https://github.com/yourusername" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/yourusername" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/yourusername" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="mailto:safaribright93@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="https://github.com/yourusername" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com/yourusername" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="mailto:safaribright93@gmail.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="hero-image">
                     <div class="profile-picture-container animate-float">
-                        <img src="assets/images/profile.jpg" alt="Bright Safari" class="profile-picture">
+                        <img src="assets/images/profile.jpg" alt="Bright Safari" class="profile-picture" loading="eager">
                         <div class="profile-picture-border"></div>
                         <div class="ai-glow"></div>
                     </div>
@@ -183,8 +195,8 @@
                     </p>
                     <p>
                         With guidance from professional mentors in the field and leveraging AI as an assistant tool, 
-                        I've developed practical applications including a fully functional 
-                        <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link-inline">Church Attendance App</a>.
+                        I've developed practical applications including a fully functional
+                        <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" rel="noopener noreferrer" class="project-link-inline">Church Attendance App</a>.
                     </p>
                     <p>
                         My high school journey was marked by significant achievements including leadership roles, 
@@ -206,7 +218,7 @@
                 
                 <div class="boeing-card animate-slide-in-right">
                     <div class="boeing-image">
-                        <img src="assets/images/Boeing Innovation camp.jpg" alt="Boeing Innovation Camp" class="boeing-img">
+                        <img src="assets/images/Boeing Innovation camp.jpg" alt="Boeing Innovation Camp" class="boeing-img" loading="lazy">
                         <div class="boeing-overlay">
                             <h4>Boeing Innovation Camp</h4>
                             <p>Aerospace Innovation Session Participant</p>
@@ -256,7 +268,7 @@
                 <div class="media-gallery">
                     <div class="gallery-item animate-zoom-in" data-animation="slide-top-left">
                         <div class="gallery-image-wrapper">
-                            <img src="assets/images/Livestreamer.jpg" alt="Live Streaming Control Setup" class="gallery-img">
+                            <img src="assets/images/Livestreamer.jpg" alt="Live Streaming Control Setup" class="gallery-img" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4 class="gallery-title">Live Stream Control</h4>
@@ -276,7 +288,7 @@
                     
                     <div class="gallery-item animate-zoom-in" style="animation-delay: 0.2s" data-animation="slide-top-right">
                         <div class="gallery-image-wrapper">
-                            <img src="assets/images/Videoshooting1.jpg" alt="Video Production Equipment" class="gallery-img">
+                            <img src="assets/images/Videoshooting1.jpg" alt="Video Production Equipment" class="gallery-img" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4 class="gallery-title">Production Setup</h4>
@@ -344,10 +356,10 @@
                     </div>
                     
                     <div class="program-links">
-                        <a href="https://sites.google.com/view/bright-safari/home" target="_blank" class="program-link animate-fade-in-up" style="animation-delay: 0.6s">
+                        <a href="https://sites.google.com/view/bright-safari/home" target="_blank" rel="noopener noreferrer" class="program-link animate-fade-in-up" style="animation-delay: 0.6s">
                             <i class="fas fa-external-link-alt"></i> My AfrikaLearns Portfolio
                         </a>
-                        <a href="https://sites.google.com/view/afrikalearns/for-students?authuser=0" target="_blank" class="program-link animate-fade-in-up" style="animation-delay: 0.8s">
+                        <a href="https://sites.google.com/view/afrikalearns/for-students?authuser=0" target="_blank" rel="noopener noreferrer" class="program-link animate-fade-in-up" style="animation-delay: 0.8s">
                             <i class="fas fa-globe"></i> AfrikaLearns Program
                         </a>
                     </div>
@@ -356,7 +368,7 @@
                 <div class="media-gallery">
                     <div class="gallery-item animate-zoom-in" data-animation="slide-bottom-left">
                         <div class="gallery-image-wrapper">
-                            <img src="assets/images/Afrikalearns 1.jpg" alt="AfrikaLearns Workshop Session" class="gallery-img">
+                            <img src="assets/images/Afrikalearns 1.jpg" alt="AfrikaLearns Workshop Session" class="gallery-img" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4 class="gallery-title">Workshop Session</h4>
@@ -376,7 +388,7 @@
                     
                     <div class="gallery-item animate-zoom-in" style="animation-delay: 0.2s" data-animation="slide-bottom-right">
                         <div class="gallery-image-wrapper">
-                            <img src="assets/images/Afrikalearns 2.jpg" alt="AfrikaLearns Global Network" class="gallery-img">
+                            <img src="assets/images/Afrikalearns 2.jpg" alt="AfrikaLearns Global Network" class="gallery-img" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4 class="gallery-title">Networking</h4>
@@ -434,7 +446,7 @@
                             <span class="tech-tag">Analytics</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" class="project-link">
+                            <a href="https://church-attendance-app-nci3.onrender.com/" target="_blank" rel="noopener noreferrer" class="project-link">
                                 <i class="fas fa-external-link-alt"></i> Live Demo
                             </a>
                         </div>
@@ -499,25 +511,25 @@
                     <div class="accordion-content">
                         <div class="skill-items">
                             <div class="skill-item">
-                                <span class="skill-name">Next.js</span>
+                                <span class="skill-name">Next.js <span class="skill-pct">85%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 85%" data-value="85"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">React</span>
+                                <span class="skill-name">React <span class="skill-pct">80%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 80%" data-value="80"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">HTML/CSS</span>
+                                <span class="skill-name">HTML/CSS <span class="skill-pct">90%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 90%" data-value="90"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-name">JavaScript <span class="skill-pct">75%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 75%" data-value="75"></div>
                                 </div>
@@ -536,25 +548,25 @@
                     <div class="accordion-content">
                         <div class="skill-items">
                             <div class="skill-item">
-                                <span class="skill-name">Fast API (Python)</span>
+                                <span class="skill-name">Fast API (Python) <span class="skill-pct">80%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 80%" data-value="80"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">PostgreSQL</span>
+                                <span class="skill-name">PostgreSQL <span class="skill-pct">75%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 75%" data-value="75"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">REST APIs</span>
+                                <span class="skill-name">REST APIs <span class="skill-pct">85%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 85%" data-value="85"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">Python</span>
+                                <span class="skill-name">Python <span class="skill-pct">85%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 85%" data-value="85"></div>
                                 </div>
@@ -573,25 +585,25 @@
                     <div class="accordion-content">
                         <div class="skill-items">
                             <div class="skill-item">
-                                <span class="skill-name">ICDL Certified</span>
+                                <span class="skill-name">ICDL Certified <span class="skill-pct">95%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 95%" data-value="95"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">Git & GitHub</span>
+                                <span class="skill-name">Git & GitHub <span class="skill-pct">80%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 80%" data-value="80"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">Cybersecurity</span>
+                                <span class="skill-name">Cybersecurity <span class="skill-pct">70%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 70%" data-value="70"></div>
                                 </div>
                             </div>
                             <div class="skill-item">
-                                <span class="skill-name">Video Production</span>
+                                <span class="skill-name">Video Production <span class="skill-pct">75%</span></span>
                                 <div class="skill-bar">
                                     <div class="skill-level animate-progress" style="width: 75%" data-value="75"></div>
                                 </div>
@@ -729,7 +741,7 @@
                     <i class="fab fa-whatsapp"></i>
                     <h3>WhatsApp</h3>
                     <p>+255 748 042 678</p>
-                    <a href="https://wa.me/255748042678" target="_blank" class="contact-option-btn">Message</a>
+                    <a href="https://wa.me/255748042678" target="_blank" rel="noopener noreferrer" class="contact-option-btn">Message</a>
                 </div>
                 <div class="contact-option animate-fade-in-up" style="animation-delay: 0.2s">
                     <i class="fas fa-phone"></i>
@@ -832,7 +844,7 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/255748042678" target="_blank" class="whatsapp-float animate-pulse">
+    <a href="https://wa.me/255748042678" target="_blank" rel="noopener noreferrer" class="whatsapp-float animate-pulse" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
