@@ -466,7 +466,7 @@ h1, h2, h3, h4 {
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
-    bottom: 20px;
+    bottom: 90px;
     right: 20px;
     width: 50px;
     height: 50px;
@@ -2612,7 +2612,17 @@ h1, h2, h3, h4 {
         flex-direction: row;
         align-items: center;
     }
+
+    .hero-social {
+        justify-content: flex-start;
+    }
     
+    /* Fix hero title underline to align left on desktop */
+    .hero-title::after {
+        left: 0;
+        transform: none;
+    }
+
     /* Profile Picture for desktop */
     .profile-picture-container {
         width: 300px;
@@ -2770,7 +2780,7 @@ h1, h2, h3, h4 {
 
 @media (min-width: 1024px) {
     .container {
-        padding: 0;
+        padding: 0 2rem;
     }
     
     .hero-title {
