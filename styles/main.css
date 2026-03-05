@@ -2847,7 +2847,6 @@ h1, h2, h3, h4 {
     
     .badge-item {
         height: 100%;
-        min-height: 140px;
     }
     
     /* AfrikaLearns desktop */
@@ -2914,7 +2913,6 @@ h1, h2, h3, h4 {
     
     .badge-item {
         height: 100%;
-        min-height: 130px;
     }
 }
 
