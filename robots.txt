@@ -1,0 +1,11 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Block access to any private or system folders (common for dev projects)
+Disallow: /node_modules/
+Disallow: /private/
+Disallow: /config/
+
+# Point search engines to your sitemap for faster indexing
+Sitemap: https://brightsafari.space/sitemap.xml
