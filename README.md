@@ -1,6 +1,6 @@
 # Bright Safari - Portfolio Website
 
-A modern, responsive portfolio website for Bright Safari, a Bachelor degree major in Computer Science & AI student at the University of Cape Town.
+A modern, responsive portfolio website for **Bright Safari**, a Computer Science & AI degree student at the University of Cape Town.
 
 ## Features
 
@@ -21,6 +21,7 @@ A modern, responsive portfolio website for Bright Safari, a Bachelor degree majo
 - Google Fonts (Inter & Space Grotesk)
 
 ## File Structure
+
 My portfolio/
 ├── index.html # Main HTML file
 ├── styles/
@@ -38,6 +39,7 @@ My portfolio/
 ## Customization
 
 ### Personal Information
+
 Update the following in `index.html`:
 - Name, title, and descriptions
 - Contact information
@@ -46,9 +48,11 @@ Update the following in `index.html`:
 - Social media links
 
 ### Styling
+
 Modify CSS variables in `:root` and `.dark-theme` sections in `styles/main.css` to change colors.
 
 ### Adding Projects
+
 Add new project cards in the projects section of `index.html` following the existing structure.
 
 ## Browser Compatibility
@@ -77,7 +81,7 @@ This project is open source and available for personal and educational use.
 Bright Titus Safari
 - Email: safaribright93@gmail.com
 - GitHub: https://github.com/Safari-bts
-- LinkedIn: https://www.linkedin.com/in/bright-safari-345833272/
+- LinkedIn: https://www.linkedin.com/in/bright-safari/
 
 ---
 
