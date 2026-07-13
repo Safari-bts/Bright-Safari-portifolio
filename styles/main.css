@@ -2956,7 +2956,9 @@ h1, h2, h3, h4 {
     --input-bg: #f8fafc;
 }
 
-/* Dark Theme Variables */
+/* Dark Theme Variables. The html selector applies the saved/system choice before
+   JavaScript finishes loading; the body class keeps existing component rules working. */
+html[data-theme="dark"] body,
 body.dark-theme {
     --primary-color: #3b82f6;
     --secondary-color: #8b5cf6;

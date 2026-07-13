@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('portfolio-theme');
+            const theme = savedTheme === 'dark' || savedTheme === 'light'
+                ? savedTheme
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        }());
+    </script>
     <title>Bright Titus Safari | AI & Tech Portfolio</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -82,7 +91,7 @@
                 <a href="#skills" class="nav-link" data-section="skills">Skills</a>
                 <a href="#achievements" class="nav-link" data-section="achievements">Achievements</a>
                 <a href="#contact" class="nav-link" data-section="contact">Contacts</a>
-                <button class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
@@ -103,7 +112,7 @@
             <a href="#skills" class="mobile-nav-link">Skills</a>
             <a href="#achievements" class="mobile-nav-link">Achievements</a>
             <a href="#contact" class="mobile-nav-link">Contacts</a>
-            <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle">
+            <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
                 <i class="fas fa-moon"></i> Toggle Theme
             </button>
         </div>

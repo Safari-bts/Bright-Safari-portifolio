@@ -8,6 +8,7 @@ const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 const aiAssistant = document.getElementById('aiAssistant');
 const backToTopBtn = document.getElementById('backToTop');
+const THEME_STORAGE_KEY = 'portfolio-theme';
 
 // Performance Optimization
 const isMobile = () => window.innerWidth <= 768;
@@ -100,21 +101,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
 });
 
-// Theme Toggle Functionality - UPDATED
+function applyTheme(theme, savePreference = false) {
+    const isDark = theme === 'dark';
+    document.documentElement.dataset.theme = theme;
+    document.body.classList.toggle('dark-theme', isDark);
+    updateThemeIcon(isDark);
+
+    document.querySelectorAll('.theme-toggle').forEach(button => {
+        button.setAttribute('aria-pressed', String(isDark));
+        button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    });
+
+    if (savePreference) localStorage.setItem(THEME_STORAGE_KEY, theme);
+}
+
+// Theme toggle functionality
 function toggleTheme() {
-    const isDark = document.body.classList.contains('dark-theme');
-    
-    if (isDark) {
-        // Switch to light mode
-        document.body.classList.remove('dark-theme');
-        updateThemeIcon(false);
-        localStorage.setItem('portfolio-theme', 'light');
-    } else {
-        // Switch to dark mode
-        document.body.classList.add('dark-theme');
-        updateThemeIcon(true);
-        localStorage.setItem('portfolio-theme', 'dark');
-    }
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    applyTheme(isDark ? 'light' : 'dark', true);
     
     // Send analytics event
     if (typeof gtag !== 'undefined') {
@@ -145,17 +149,12 @@ function updateThemeIcon(isDark) {
 
 // Initialize theme based on localStorage or system preference - UPDATED
 function initTheme() {
-    const savedTheme = localStorage.getItem('portfolio-theme');
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Always apply theme immediately
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-        document.body.classList.add('dark-theme');
-        updateThemeIcon(true);
-    } else {
-        document.body.classList.remove('dark-theme');
-        updateThemeIcon(false);
-    }
+    const theme = savedTheme === 'dark' || savedTheme === 'light'
+        ? savedTheme
+        : (systemPrefersDark ? 'dark' : 'light');
+    applyTheme(theme);
     
     // Add transition after initial load
     setTimeout(() => {
@@ -257,15 +256,9 @@ function initEventListeners() {
     // Listen for system theme changes
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     darkModeMediaQuery.addEventListener('change', (e) => {
-        if (!localStorage.getItem('portfolio-theme')) {
+        if (!localStorage.getItem(THEME_STORAGE_KEY)) {
             // Only update if user hasn't set a preference
-            if (e.matches) {
-                document.body.classList.add('dark-theme');
-                updateThemeIcon(true);
-            } else {
-                document.body.classList.remove('dark-theme');
-                updateThemeIcon(false);
-            }
+            applyTheme(e.matches ? 'dark' : 'light');
         }
     });
     
