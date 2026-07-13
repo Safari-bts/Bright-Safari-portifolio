@@ -3629,6 +3629,17 @@ body:not(.dark-theme) .ai-glow {
     line-height: 1.5;
 }
 
+.ai-message.ai-user {
+    justify-content: flex-end;
+}
+
+.ai-message.ai-user .ai-text {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.22), rgba(168, 85, 247, 0.2));
+    border-radius: 12px 0 12px 12px;
+    color: var(--text-color, #fff);
+    max-width: 85%;
+}
+
 .ai-options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -3663,6 +3674,55 @@ body:not(.dark-theme) .ai-glow {
 .ai-option i {
     font-size: 1.25rem;
     color: var(--neon-blue, #00d4ff);
+}
+
+.ai-guide-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: -0.25rem;
+}
+
+.ai-guide-form input {
+    min-width: 0;
+    flex: 1;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.65);
+    color: var(--text-color, #fff);
+    font: inherit;
+}
+
+.ai-guide-form input:focus,
+.ai-option:focus-visible,
+.ai-modal-close:focus-visible {
+    outline: 2px solid var(--neon-blue, #00d4ff);
+    outline-offset: 2px;
+}
+
+.ai-guide-form button {
+    width: 42px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--ai-gradient, linear-gradient(135deg, #00d4ff, #a855f7));
+    color: #fff;
+    cursor: pointer;
+}
+
+.ai-guide-form button:hover {
+    filter: brightness(1.12);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 .ai-modal-footer {

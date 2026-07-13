@@ -1304,7 +1304,7 @@ function addWhatsAppButton() {
     // Only add on mobile or if user prefers reduced motion
     if (isMobile() || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const whatsappBtn = document.createElement('a');
-        whatsappBtn.href = 'https://wa.me/255748042678';
+        whatsappBtn.href = 'https://wa.me/27637055413';
         whatsappBtn.target = '_blank';
         whatsappBtn.rel = 'noopener noreferrer';
         whatsappBtn.className = 'whatsapp-badge';
@@ -1390,16 +1390,18 @@ function initParallaxEffect() {
     }, { passive: true });
 }
 
-// AI Assistant functionality
+// Portfolio guide functionality. It intentionally gives guided answers from content
+// already on this site; it does not claim to be a live AI chat service.
 function showAIAssistant() {
-    // Create AI assistant modal
+    if (document.querySelector('.ai-modal')) return;
+
     const aiModal = document.createElement('div');
     aiModal.className = 'ai-modal';
     aiModal.innerHTML = `
-        <div class="ai-modal-content">
+        <div class="ai-modal-content" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
             <div class="ai-modal-header">
-                <h3><i class="fas fa-robot"></i> AI Assistant</h3>
-                <button class="ai-modal-close">&times;</button>
+                <h3 id="guideTitle"><i class="fas fa-robot"></i> Portfolio Guide</h3>
+                <button class="ai-modal-close" aria-label="Close portfolio guide">&times;</button>
             </div>
             <div class="ai-modal-body">
                 <div class="ai-message ai-bot">
@@ -1407,7 +1409,7 @@ function showAIAssistant() {
                         <i class="fas fa-robot"></i>
                     </div>
                     <div class="ai-text">
-                        <p>Hello! I'm Bright's AI Assistant. How can I help you today?</p>
+                        <p>Hi! I can help you explore Bright’s work, skills, and ways to connect. What would you like to see?</p>
                     </div>
                 </div>
                 <div class="ai-options">
@@ -1428,9 +1430,14 @@ function showAIAssistant() {
                         <span>Learn About Bright</span>
                     </button>
                 </div>
+                <form class="ai-guide-form">
+                    <label class="sr-only" for="guideQuestion">Ask about this portfolio</label>
+                    <input id="guideQuestion" type="text" autocomplete="off" placeholder="Try: What does Bright build?">
+                    <button type="submit" aria-label="Send question"><i class="fas fa-arrow-up"></i></button>
+                </form>
             </div>
             <div class="ai-modal-footer">
-                <p><i class="fas fa-info-circle"></i> This AI assistant demonstrates Bright's AI capabilities</p>
+                <p><i class="fas fa-info-circle"></i> A quick guide to this portfolio</p>
             </div>
         </div>
     `;
@@ -1442,24 +1449,29 @@ function showAIAssistant() {
         aiModal.classList.add('show');
     }, 10);
     
-    // Close modal
-    const closeBtn = aiModal.querySelector('.ai-modal-close');
-    closeBtn.addEventListener('click', () => {
+    const closeGuide = () => {
         aiModal.classList.remove('show');
-        setTimeout(() => {
-            aiModal.remove();
-        }, 300);
-    });
+        setTimeout(() => aiModal.remove(), 300);
+    };
+
+    const closeBtn = aiModal.querySelector('.ai-modal-close');
+    closeBtn.addEventListener('click', closeGuide);
+    closeBtn.focus();
     
     // Close on outside click
     aiModal.addEventListener('click', (e) => {
         if (e.target === aiModal) {
-            aiModal.classList.remove('show');
-            setTimeout(() => {
-                aiModal.remove();
-            }, 300);
+            closeGuide();
         }
     });
+
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            closeGuide();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    document.addEventListener('keydown', handleEscape);
     
     // Handle AI options
     const options = aiModal.querySelectorAll('.ai-option');
@@ -1467,12 +1479,40 @@ function showAIAssistant() {
         option.addEventListener('click', () => {
             const action = option.getAttribute('data-action');
             handleAIAction(action);
-            aiModal.classList.remove('show');
-            setTimeout(() => {
-                aiModal.remove();
-            }, 300);
         });
     });
+
+    const guideForm = aiModal.querySelector('.ai-guide-form');
+    const guideQuestion = aiModal.querySelector('#guideQuestion');
+    guideForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const question = guideQuestion.value.trim();
+        if (!question) return;
+        addGuideMessage(aiModal, question, 'user');
+        guideQuestion.value = '';
+        window.setTimeout(() => addGuideMessage(aiModal, getGuideReply(question), 'bot'), 250);
+    });
+}
+
+function addGuideMessage(modal, message, sender) {
+    const body = modal.querySelector('.ai-modal-body');
+    const messageEl = document.createElement('div');
+    messageEl.className = `ai-message ai-${sender}`;
+    messageEl.innerHTML = sender === 'bot'
+        ? `<div class="ai-avatar"><i class="fas fa-robot"></i></div><div class="ai-text"><p></p></div>`
+        : '<div class="ai-text"><p></p></div>';
+    messageEl.querySelector('p').textContent = message;
+    body.insertBefore(messageEl, body.querySelector('.ai-guide-form'));
+    body.scrollTop = body.scrollHeight;
+}
+
+function getGuideReply(question) {
+    const text = question.toLowerCase();
+    if (/project|build|app|work/.test(text)) return 'Bright has built a church attendance app with real-time tracking, member records, and analytics. Choose “View Projects” to explore it.';
+    if (/skill|technology|tech|stack|python|react/.test(text)) return 'Bright works with Python, FastAPI, PostgreSQL, React, Next.js, HTML/CSS, and JavaScript. Choose “See Skills” for the full list.';
+    if (/contact|email|whatsapp|phone|hire|collaborat/.test(text)) return 'You can email Bright, send a WhatsApp message, or use the contact form. Choose “Contact Bright” and the page will take you there.';
+    if (/about|student|education|uct|experience/.test(text)) return 'Bright is a Computer Science and AI student at the University of Cape Town, with interests in AI, full-stack development, cybersecurity, and live production.';
+    return 'I can help you find Bright’s projects, skills, background, or contact details. Try one of the buttons above.';
 }
 
 // Handle AI assistant actions
